@@ -64,3 +64,5 @@ const createNewsList = () => {
 };
 
 const dataFromServer = createNewsList();
+
+console.log('data', dataFromServer);
