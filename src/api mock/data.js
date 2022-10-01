@@ -63,6 +63,6 @@ const createNewsList = () => {
   state.newsPartsList = state.newsPartsList.flat();
 };
 
-const dataFromServer = createNewsList();
+createNewsList();
 
-console.log('data', dataFromServer);
+export const dataFromServer = state;

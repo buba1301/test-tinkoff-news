@@ -2,6 +2,10 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { dataFromServer } from './api mock/data';
+
+console.log('data', dataFromServer);
+
 function App() {
   return (
     <div className='App'>
