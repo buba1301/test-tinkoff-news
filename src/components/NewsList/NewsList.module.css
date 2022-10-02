@@ -1,0 +1,11 @@
+.newsWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.newsCard {
+  width: 166px;
+  height: 166px;
+  border-radius: 10px;
+  background-color: cadetblue;
+}
