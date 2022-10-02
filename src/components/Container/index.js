@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { mockApi } from '../../api mock';
+import NewsList from '../NewsList';
 
 import s from './Container.module.css';
 
 const Containner = () => {
+  const [news, setNews] = useState({
+    newsList: [],
+    newsPartsList: [],
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await mockApi.getData();
+      setNews(response);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className={s.newsContainer}>
       <div className={s.newsWrap}>
@@ -17,7 +34,7 @@ const Containner = () => {
             </div>
           </div>
         </div>
-        <div>Contant</div>
+        <NewsList data={news} />
         <div>Navigation</div>
       </div>
     </div>
