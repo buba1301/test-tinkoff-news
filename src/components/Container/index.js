@@ -5,20 +5,36 @@ import NewsList from '../NewsList';
 
 import s from './Container.module.css';
 
+const itemsIndexPerPage = {
+  1: [0, 4],
+  2: [4, 8],
+  3: [8, 12],
+};
+
 const Containner = () => {
-  const [news, setNews] = useState({
+  const [data, setData] = useState({
     newsList: [],
     newsPartsList: [],
   });
 
+  const [newsOnPage, setNewsOnPage] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await mockApi.getData();
-      setNews(response);
+      setData(response);
     };
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const [startNews, endNews] = itemsIndexPerPage[currentPage];
+
+    setNewsOnPage(data.newsList.slice(startNews, endNews));
+  }, [currentPage, data]);
 
   return (
     <div className={s.newsContainer}>
@@ -34,7 +50,7 @@ const Containner = () => {
             </div>
           </div>
         </div>
-        <NewsList data={news} />
+        <NewsList newsList={newsOnPage} />
         <div>Navigation</div>
       </div>
     </div>
