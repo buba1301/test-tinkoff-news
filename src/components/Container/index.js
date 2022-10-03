@@ -24,6 +24,7 @@ const Containner = () => {
   const [data, setData] = useState({
     newsList: [],
     newsPartsList: [],
+    newsPagesCount: 0,
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,6 +59,13 @@ const Containner = () => {
     setNewsOnPageList(data.newsList.slice(startNews, endNews));
   }, [currentPage, data]);
 
+  const handleClickNextPageButton = (e) => {
+    const currentPageValue =
+      e.target.id === 'next' ? currentPage + 1 : currentPage - 1;
+
+    setCurrentPage(currentPageValue);
+  };
+
   return (
     <div className={s.newsContainer}>
       <div className={s.newsWrap}>
@@ -65,15 +73,23 @@ const Containner = () => {
           <h1>Для вас</h1>
           <div className={s.sliderArrows}>
             <div className={s.arrowButtonsWrap}>
-              <button></button>
+              <button
+                disabled={currentPage === 1}
+                id='previous'
+                onClick={handleClickNextPageButton}
+              ></button>
             </div>
             <div className={s.arrowButtonsWrap}>
-              <button></button>
+              <button
+                disabled={currentPage === data.newsPagesCount}
+                id='next'
+                onClick={handleClickNextPageButton}
+              ></button>
             </div>
           </div>
         </div>
         <NewsList newsList={newsOnPageList} />
-        <div>Navigation</div>
+        <div>{currentPage}</div>
       </div>
     </div>
   );
