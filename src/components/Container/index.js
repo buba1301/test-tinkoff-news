@@ -5,10 +5,19 @@ import NewsList from '../NewsList';
 
 import s from './Container.module.css';
 
-const itemsIndexPerPage = {
-  1: [0, 4],
-  2: [4, 8],
-  3: [8, 12],
+const getNewsOnPageList = (newsOnPage, newsPagesCount) => {
+  let res = {};
+
+  let firstIndex = 0;
+  let lastIndex = newsOnPage;
+
+  for (let i = 0; i < newsPagesCount; i++) {
+    res = { ...res, [i + 1]: [firstIndex, lastIndex] };
+    firstIndex = firstIndex + newsOnPage;
+    lastIndex = lastIndex + newsOnPage;
+  }
+
+  return res;
 };
 
 const Containner = () => {
@@ -17,23 +26,36 @@ const Containner = () => {
     newsPartsList: [],
   });
 
-  const [newsOnPage, setNewsOnPage] = useState([]);
-
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [newsOnPage, setNewsOnPage] = useState({});
+
+  const [newsOnPageList, setNewsOnPageList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await mockApi.getData();
       setData(response);
+
+      const newsPagesCount = response.newsPagesCount;
+
+      const newsOnPage = response.newsList.length / response.newsPagesCount;
+
+      const newsIndexPerPage = getNewsOnPageList(newsOnPage, newsPagesCount);
+
+      setNewsOnPage(newsIndexPerPage);
     };
 
     fetchData();
   }, []);
 
   useEffect(() => {
-    const [startNews, endNews] = itemsIndexPerPage[currentPage];
+    const res = newsOnPage[currentPage];
 
-    setNewsOnPage(data.newsList.slice(startNews, endNews));
+    const startNews = res && res[0];
+    const endNews = res && res[1];
+
+    setNewsOnPageList(data.newsList.slice(startNews, endNews));
   }, [currentPage, data]);
 
   return (
@@ -50,7 +72,7 @@ const Containner = () => {
             </div>
           </div>
         </div>
-        <NewsList newsList={newsOnPage} />
+        <NewsList newsList={newsOnPageList} />
         <div>Navigation</div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker';
 const state = {
   newsList: [],
   newsPartsList: [],
+  newsPagesCount: 3
 };
 
 const createId = () => Math.ceil(Math.random() * 10);
