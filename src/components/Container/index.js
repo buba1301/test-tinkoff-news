@@ -33,6 +33,8 @@ const Containner = () => {
 
   const [newsOnPageList, setNewsOnPageList] = useState([]);
 
+  const [modalOpen, setModalOpen] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await mockApi.getData();
@@ -66,32 +68,47 @@ const Containner = () => {
     setCurrentPage(currentPageValue);
   };
 
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
   return (
-    <div className={s.newsContainer}>
-      <div className={s.newsWrap}>
-        <div className={s.header}>
-          <h1>Для вас</h1>
-          <div className={s.sliderArrows}>
-            <div className={s.arrowButtonsWrap}>
-              <button
-                disabled={currentPage === 1}
-                id='previous'
-                onClick={handleClickNextPageButton}
-              ></button>
-            </div>
-            <div className={s.arrowButtonsWrap}>
-              <button
-                disabled={currentPage === data.newsPagesCount}
-                id='next'
-                onClick={handleClickNextPageButton}
-              ></button>
+    <>
+      <div className={s.newsContainer}>
+        <div className={s.newsWrap}>
+          <div className={s.header}>
+            <h1>Для вас</h1>
+            <div className={s.sliderArrows}>
+              <div className={s.arrowButtonsWrap}>
+                <button
+                  disabled={currentPage === 1}
+                  id='previous'
+                  onClick={handleClickNextPageButton}
+                ></button>
+              </div>
+              <div className={s.arrowButtonsWrap}>
+                <button
+                  disabled={currentPage === data.newsPagesCount}
+                  id='next'
+                  onClick={handleClickNextPageButton}
+                ></button>
+              </div>
             </div>
           </div>
+          <NewsList newsList={newsOnPageList} openModal={handleOpenModal} />
+          <div>{`${modalOpen}`}</div>
         </div>
-        <NewsList newsList={newsOnPageList} />
-        <div>{currentPage}</div>
       </div>
-    </div>
+      {modalOpen && (
+        <div className={s.modalRoot} onClick={handleCloseModal}>
+          <div className={s.modal}></div>
+        </div>
+      )}
+    </>
   );
 };
 
