@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { mockApi } from '../../api mock';
+import { mockApi } from '../../apimock';
 import NewsList from '../NewsList';
 import Modal from '../Modal';
 
@@ -78,8 +78,6 @@ const Containner = () => {
       (e) => e.newsId === currentNewsId
     );
 
-    // console.log('filter', filterNewsPartsList);
-
     setCurrentNewsPartList(filterNewsPartsList);
     setModalOpen(true);
   };
@@ -117,7 +115,7 @@ const Containner = () => {
       </div>
       {modalOpen && (
         <div className={s.modalRoot} onClick={handleCloseModal}>
-          <Modal />
+          <Modal newsParts={currentNewsPartList} />
         </div>
       )}
     </>
