@@ -8,7 +8,12 @@ const NewsList = ({ newsList, openModal }) => {
       <div className={s.newsWrap}>
         {newsList.map(({ newsName, newsId }) => {
           return (
-            <div className={s.newsCard} key={newsId} onClick={openModal}>
+            <div
+              className={s.newsCard}
+              key={newsId}
+              id={newsId}
+              onClick={openModal}
+            >
               {newsName}
             </div>
           );

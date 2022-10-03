@@ -9,4 +9,9 @@
   border-radius: 10px;
   background-color: cadetblue;
   cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

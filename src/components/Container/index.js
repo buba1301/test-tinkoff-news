@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { mockApi } from '../../api mock';
 import NewsList from '../NewsList';
+import Modal from '../Modal';
 
 import s from './Container.module.css';
 
@@ -32,6 +33,8 @@ const Containner = () => {
   const [newsOnPage, setNewsOnPage] = useState({});
 
   const [newsOnPageList, setNewsOnPageList] = useState([]);
+
+  const [currentNewsPartList, setCurrentNewsPartList] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -68,7 +71,16 @@ const Containner = () => {
     setCurrentPage(currentPageValue);
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (e) => {
+    const currentNewsId = e.target.id;
+
+    const filterNewsPartsList = data.newsPartsList.filter(
+      (e) => e.newsId === currentNewsId
+    );
+
+    // console.log('filter', filterNewsPartsList);
+
+    setCurrentNewsPartList(filterNewsPartsList);
     setModalOpen(true);
   };
 
@@ -105,7 +117,7 @@ const Containner = () => {
       </div>
       {modalOpen && (
         <div className={s.modalRoot} onClick={handleCloseModal}>
-          <div className={s.modal}></div>
+          <Modal />
         </div>
       )}
     </>
