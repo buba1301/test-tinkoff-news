@@ -1,6 +1,7 @@
 .modal {
+  position: relative;
   width: 365px;
-  height: 667px;
+  height: 650px;
   background-color: black;
   margin: auto;
   border-radius: 20px;
@@ -11,7 +12,26 @@
   align-items: center;
 
   color: aliceblue;
-  overflow: hidden;
+}
+
+.newsButtonArrows {
+  background: red;
+  border-radius: 50%;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 4px;
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  cursor: pointer;
+}
+
+.left {
+  left: -48px;
+}
+
+.right {
+  right: -48px;
 }
 
 .text1 {
@@ -21,7 +41,7 @@
 }
 
 .text2 {
-	background-color: darkblue;
+  background-color: darkblue;
 }
 
 .text3 {
