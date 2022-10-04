@@ -6,10 +6,6 @@ const state = {
   newsPagesCount: 3,
 };
 
-const createId = () => Math.ceil(Math.random() * 10);
-
-const createName = () => `News${createId()}`;
-
 const createList = (createFunc, count, parentId) => {
   const res = [];
 
@@ -49,7 +45,6 @@ const createNews = (newsId) => {
 
 const createNewsList = () => {
   const newsCount = 12;
-  const res = [];
 
   for (let i = 0; i < newsCount; i++) {
     const newsId = faker.datatype.uuid();

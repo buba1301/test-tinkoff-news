@@ -6,7 +6,7 @@ import s from './Modal.module.css';
 const arrowButtons = ['left', 'right'];
 
 const Modal = ({ newsParts }) => {
-  const [currentPageIndex, setNextIndex] = useState(0);
+  const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
   const [currentPage, setCurrentPage] = useState({});
 
@@ -16,6 +16,19 @@ const Modal = ({ newsParts }) => {
 
   const getClassNamesButtonsArrow = (direction) =>
     cn(s.newsButtonArrows, s[direction]);
+
+  const handleClickButtonsArrow = (e) => {
+    e.stopPropagation();
+
+    setCurrentPageIndex((prevState) =>
+      e.target.id === 'left' ? prevState - 1 : prevState + 1
+    );
+  };
+
+  const disabledButton = {
+    left: currentPageIndex === 0,
+    right: currentPageIndex === newsParts.length - 1,
+  };
 
   return (
     <div className={s.modal}>
@@ -31,7 +44,14 @@ const Modal = ({ newsParts }) => {
         <div
           className={getClassNamesButtonsArrow(direction)}
           key={direction}
-        ></div>
+          id={direction}
+        >
+          <button
+            id={direction}
+            onClick={handleClickButtonsArrow}
+            disabled={disabledButton[direction]}
+          ></button>
+        </div>
       ))}
     </div>
   );

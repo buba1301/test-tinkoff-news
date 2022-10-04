@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 
-import { dataFromServer } from './apimock/data';
 import Containner from './components/Container';
 
 function App() {
