@@ -16,6 +16,7 @@ const Modal = ({ newsParts }) => {
       {currentPage.textList &&
         currentPage.textList.map((elem, index) => {
           const className = `text${index}`;
+
           return (
             <div className={className} key={elem.textId}>
               {elem.text}
