@@ -33,7 +33,7 @@ const Modal = ({ newsParts, isOpen }) => {
     e.stopPropagation();
   };
 
-  const modalClassnames = cn(s.modal, {
+  const modalClassNames = cn(s.modal, {
     [s.open]: isOpen,
   });
 
@@ -43,7 +43,7 @@ const Modal = ({ newsParts, isOpen }) => {
   };
 
   return (
-    <div className={modalClassnames}>
+    <div className={modalClassNames} onClick={handleClickNewsLink}>
       {currentPage.textList &&
         currentPage.textList.map((elem, index) => {
           return (

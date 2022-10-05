@@ -31,7 +31,7 @@ const Containner = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [newsOnPage, setNewsOnPage] = useState({});
+  const [newsOnPage, setNewsOnPage] = useState(0);
 
   const [newsOnPageList, setNewsOnPageList] = useState([]);
 
@@ -90,8 +90,6 @@ const Containner = () => {
   const modalRootClassnames = cn(s.modalRoot, {
     [s.open]: modalOpen,
   });
-
-  console.log('classNames', modalRootClassnames);
 
   return (
     <>
