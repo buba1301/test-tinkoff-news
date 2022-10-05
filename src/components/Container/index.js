@@ -92,10 +92,7 @@ const Containner = () => {
     const nextNewsId = data.newsList[nextNewsIndex].newsId;
 
     setCurrentNewsId(nextNewsId);
-    console.log('??????', currentNewsId, nextNewsIndex);
   };
-
-  console.log('ffffff', currentNewsPartList);
 
   const handleOpenModal = (e) => {
     const currentNewsId = e.target.id;

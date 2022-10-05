@@ -26,8 +26,6 @@ const Modal = ({ newsParts, isOpen, onClick }) => {
 
     const id = e.target.id;
 
-    console.log('!!!', id);
-
     const firstNewsParts = 0;
     const lastNewsPartIndex = newsParts.length - 1;
 
@@ -38,15 +36,11 @@ const Modal = ({ newsParts, isOpen, onClick }) => {
       onClick(id);
       setCurrentPageIndex(0);
     } else {
-      console.log('????');
-
       setCurrentPageIndex((prevState) =>
         id === 'left' ? prevState - 1 : prevState + 1
       );
     }
   };
-
-  console.log('currentPageIndex', currentPageIndex);
 
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
