@@ -5,7 +5,11 @@ import s from './Modal.module.css';
 
 const arrowButtons = ['left', 'right'];
 
-const Modal = ({ newsParts }) => {
+//TODO: добавить логику перехода на следующую или предыдущую новости, если все части текущей новости закончились или вернулись на первую часть
+
+//TODO: добавить прогрессбар по каждой новости и автоматическое переключение на следующую новости по окончании времени
+
+const Modal = ({ newsParts, isOpen }) => {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
   const [currentPage, setCurrentPage] = useState({});
@@ -25,13 +29,21 @@ const Modal = ({ newsParts }) => {
     );
   };
 
+  const handleClickNewsLink = (e) => {
+    e.stopPropagation();
+  };
+
+  const modalClassnames = cn(s.modal, {
+    [s.open]: isOpen,
+  });
+
   const disabledButton = {
     left: currentPageIndex === 0,
     right: currentPageIndex === newsParts.length - 1,
   };
 
   return (
-    <div className={s.modal}>
+    <div className={modalClassnames}>
       {currentPage.textList &&
         currentPage.textList.map((elem, index) => {
           return (

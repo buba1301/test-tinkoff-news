@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import cn from 'classnames';
 
 import { mockApi } from '../../apimock';
 import NewsList from '../NewsList';
@@ -86,6 +87,12 @@ const Containner = () => {
     setModalOpen(false);
   };
 
+  const modalRootClassnames = cn(s.modalRoot, {
+    [s.open]: modalOpen,
+  });
+
+  console.log('classNames', modalRootClassnames);
+
   return (
     <>
       <div className={s.newsContainer}>
@@ -113,11 +120,11 @@ const Containner = () => {
           <div>{`${modalOpen}`}</div>
         </div>
       </div>
-      {modalOpen && (
-        <div className={s.modalRoot} onClick={handleCloseModal}>
-          <Modal newsParts={currentNewsPartList} />
-        </div>
-      )}
+      <div className={modalRootClassnames} onClick={handleCloseModal}>
+        {currentNewsPartList.length > 0 && (
+          <Modal newsParts={currentNewsPartList} isOpen={modalOpen} />
+        )}
+      </div>
     </>
   );
 };

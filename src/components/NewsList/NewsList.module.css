@@ -6,8 +6,6 @@
 .newsCard {
   width: 166px;
   height: 166px;
-  max-width: 166px;
-  max-height: 166px;
   border-radius: 10px;
   background-color: cadetblue;
   cursor: pointer;
