@@ -9,14 +9,14 @@ const arrowButtons = ['left', 'right'];
 
 //TODO: добавить прогрессбар по каждой новости и автоматическое переключение на следующую новости по окончании времени
 
-const Modal = ({ newsParts, isOpen }) => {
+const Modal = ({ newsParts, isOpen, onClick }) => {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
   const [currentPage, setCurrentPage] = useState({});
 
   useEffect(() => {
     setCurrentPage(newsParts[currentPageIndex]);
-  }, [currentPageIndex]);
+  }, [currentPageIndex, newsParts]);
 
   const getClassNamesButtonsArrow = (direction) =>
     cn(s.newsButtonArrows, s[direction]);
@@ -24,10 +24,29 @@ const Modal = ({ newsParts, isOpen }) => {
   const handleClickButtonsArrow = (e) => {
     e.stopPropagation();
 
-    setCurrentPageIndex((prevState) =>
-      e.target.id === 'left' ? prevState - 1 : prevState + 1
-    );
+    const id = e.target.id;
+
+    console.log('!!!', id);
+
+    const firstNewsParts = 0;
+    const lastNewsPartIndex = newsParts.length - 1;
+
+    if (currentPageIndex === lastNewsPartIndex) {
+      onClick(id);
+      setCurrentPageIndex(0);
+    } else if (currentPageIndex === firstNewsParts && id === 'left') {
+      onClick(id);
+      setCurrentPageIndex(0);
+    } else {
+      console.log('????');
+
+      setCurrentPageIndex((prevState) =>
+        id === 'left' ? prevState - 1 : prevState + 1
+      );
+    }
   };
+
+  console.log('currentPageIndex', currentPageIndex);
 
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
@@ -38,8 +57,8 @@ const Modal = ({ newsParts, isOpen }) => {
   });
 
   const disabledButton = {
-    left: currentPageIndex === 0,
-    right: currentPageIndex === newsParts.length - 1,
+    // left: currentPageIndex === 0,
+    // right: currentPageIndex === newsParts.length - 1,
   };
 
   return (
