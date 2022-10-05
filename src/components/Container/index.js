@@ -25,6 +25,9 @@ const getNewsOnPageList = (newsOnPage, newsPagesCount) => {
 const filterNewsPartsList = (list, currentNewsId) =>
   list.filter((e) => e.newsId === currentNewsId);
 
+const getCurrentNewsIndex = (currentNewsId, list) =>
+  list.findIndex((elem) => elem.newsId === currentNewsId);
+
 const Containner = () => {
   const [data, setData] = useState({
     newsList: [],
@@ -35,6 +38,8 @@ const Containner = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [currentNewsId, setCurrentNewsId] = useState('');
+
+  const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
 
   const [newsOnPage, setNewsOnPage] = useState({});
 
@@ -83,11 +88,13 @@ const Containner = () => {
   };
 
   const handleCheckoutNextOrPrevNews = (direction) => {
-    const shiftNews = direction === 'right' ? 1 : -1;
+    const shiftNewsIndex = direction === 'right' ? 1 : -1;
 
-    const nextNewsIndex =
-      data.newsList.findIndex((elem) => elem.newsId === currentNewsId) +
-      shiftNews;
+    const currentNewsIndex = getCurrentNewsIndex(currentNewsId, data.newsList);
+
+    const nextNewsIndex = currentNewsIndex + shiftNewsIndex;
+
+    setCurrentNewsIndex(nextNewsIndex);
 
     const nextNewsId = data.newsList[nextNewsIndex].newsId;
 
@@ -97,8 +104,11 @@ const Containner = () => {
   const handleOpenModal = (e) => {
     const currentNewsId = e.target.id;
 
+    const currentNewsIndex = getCurrentNewsIndex(currentNewsId, data.newsList);
+
     setModalOpen(true);
     setCurrentNewsId(currentNewsId);
+    setCurrentNewsIndex(currentNewsIndex);
   };
 
   const handleCloseModal = () => {
@@ -142,6 +152,8 @@ const Containner = () => {
             newsParts={currentNewsPartList}
             isOpen={modalOpen}
             onClick={handleCheckoutNextOrPrevNews}
+            currentNewsIndex={currentNewsIndex}
+            lastNewsIndex={data.newsList.length - 1}
           />
         )}
       </div>

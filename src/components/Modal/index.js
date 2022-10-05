@@ -9,7 +9,13 @@ const arrowButtons = ['left', 'right'];
 
 //TODO: добавить прогрессбар по каждой новости и автоматическое переключение на следующую новости по окончании времени
 
-const Modal = ({ newsParts, isOpen, onClick }) => {
+const Modal = ({
+  newsParts,
+  isOpen,
+  onClick,
+  currentNewsIndex,
+  lastNewsIndex,
+}) => {
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
   const [currentPage, setCurrentPage] = useState({});
@@ -50,9 +56,19 @@ const Modal = ({ newsParts, isOpen, onClick }) => {
     [s.open]: isOpen,
   });
 
+  console.log(
+    'disable',
+    currentNewsIndex,
+    currentPageIndex,
+    lastNewsIndex,
+    newsParts.length - 1
+  );
+
   const disabledButton = {
-    // left: currentPageIndex === 0,
-    // right: currentPageIndex === newsParts.length - 1,
+    left: currentNewsIndex === 0 && currentPageIndex === 0,
+    right:
+      currentNewsIndex === lastNewsIndex &&
+      currentPageIndex === newsParts.length - 1,
   };
 
   return (
