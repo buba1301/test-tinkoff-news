@@ -115,6 +115,8 @@ const Containner = () => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    setCurrentNewsId('');
+    setCurrentNewsIndex(0);
   };
 
   const modalRootClassnames = cn(s.modalRoot, {
