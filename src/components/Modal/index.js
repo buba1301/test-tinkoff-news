@@ -56,14 +56,6 @@ const Modal = ({
     [s.open]: isOpen,
   });
 
-  console.log(
-    'disable',
-    currentNewsIndex,
-    currentPageIndex,
-    lastNewsIndex,
-    newsParts.length - 1
-  );
-
   const disabledButton = {
     left: currentNewsIndex === 0 && currentPageIndex === 0,
     right:
