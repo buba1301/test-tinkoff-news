@@ -8,6 +8,7 @@
   height: 166px;
   border-radius: 10px;
   background-color: cadetblue;
+  background-size: 166px 166px;
   cursor: pointer;
 
   display: flex;

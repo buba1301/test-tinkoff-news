@@ -23,6 +23,8 @@ const Modal = ({
 
   const [currentPage, setCurrentPage] = useState({});
 
+  console.log('currentPage', currentPage);
+
   useEffect(() => {
     setCurrentPage(newsParts[currentPageIndex]);
   }, [currentPageIndex, newsParts]);
