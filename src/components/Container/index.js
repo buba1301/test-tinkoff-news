@@ -66,10 +66,10 @@ const Containner = () => {
   }, []);
 
   useEffect(() => {
-    const res = newsOnPage[currentPage];
+    const startAndEndNewsIndexList = newsOnPage[currentPage];
 
-    const startNews = res && res[0];
-    const endNews = res && res[1];
+    const startNews = startAndEndNewsIndexList && startAndEndNewsIndexList[0];
+    const endNews = startAndEndNewsIndexList && startAndEndNewsIndexList[1];
 
     setNewsOnPageList(data.newsList.slice(startNews, endNews));
   }, [currentPage, data]);

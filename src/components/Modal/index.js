@@ -9,6 +9,9 @@ const arrowButtons = ['left', 'right'];
 
 //TODO: добавить прогрессбар по каждой новости и автоматическое переключение на следующую новости по окончании времени
 
+const getClassNamesButtonsArrow = (direction) =>
+  cn(s.newsButtonArrows, s[direction]);
+
 const Modal = ({
   newsParts,
   isOpen,
@@ -23,9 +26,6 @@ const Modal = ({
   useEffect(() => {
     setCurrentPage(newsParts[currentPageIndex]);
   }, [currentPageIndex, newsParts]);
-
-  const getClassNamesButtonsArrow = (direction) =>
-    cn(s.newsButtonArrows, s[direction]);
 
   const handleClickButtonsArrow = (e) => {
     e.stopPropagation();
