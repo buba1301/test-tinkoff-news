@@ -71,7 +71,9 @@ const Containner = () => {
     const startNews = startAndEndNewsIndexList && startAndEndNewsIndexList[0];
     const endNews = startAndEndNewsIndexList && startAndEndNewsIndexList[1];
 
-    setNewsOnPageList(data.newsList.slice(startNews, endNews));
+    const newsOnCurrentPageList = data.newsList.slice(startNews, endNews);
+
+    setNewsOnPageList(newsOnCurrentPageList);
   }, [currentPage, data]);
 
   useEffect(() => {
