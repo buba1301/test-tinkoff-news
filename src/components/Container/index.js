@@ -168,6 +168,7 @@ const Containner = () => {
         </div>
       </div>
       <div className={modalRootClassnames} onClick={handleCloseModal}>
+        <span className={s.btnClose}></span>
         {currentNewsPartList.length > 0 && (
           <Modal
             newsParts={currentNewsPartList}

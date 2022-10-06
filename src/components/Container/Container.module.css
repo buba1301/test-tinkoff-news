@@ -101,3 +101,43 @@
   opacity: 1;
   visibility: visible;
 }
+
+.btnClose {
+  width: 32px;
+  height: 32px;
+  display: block;
+  position: absolute;
+  right: 34%;
+  top: 4%;
+  transform: translate(0, -50%);
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.btnClose:active {
+  transform: scale(80%);
+}
+
+.btnClose:hover::before,
+.btnClose:hover::after {
+  background-color: #f300b4;
+}
+
+.btnClose::before,
+.btnClose::after {
+  content: '';
+  width: 32px;
+  height: 6px;
+  display: block;
+  background: #000;
+}
+
+.btnClose::before {
+  margin-top: 12px;
+  transform: rotate(45deg);
+}
+
+.btnClose::after {
+  margin-top: -6px;
+  transform: rotate(-45deg);
+}
