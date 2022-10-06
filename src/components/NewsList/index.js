@@ -3,8 +3,6 @@ import React from 'react';
 import s from './NewsList.module.css';
 
 const NewsList = ({ newsList, openModal }) => {
-  console.log('newslist', newsList);
-
   return (
     <>
       <div className={s.newsWrap}>

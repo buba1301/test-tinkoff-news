@@ -22,11 +22,17 @@ const getNewsOnPageList = (newsOnPage, newsPagesCount) => {
   return res;
 };
 
-const filterNewsPartsList = (list, currentNewsId) =>
-  list.filter((e) => e.newsId === currentNewsId);
+const filterNewsPartsList = (list, currentNewsId) => {
+  if (list.length === 0) {
+    return [];
+  }
 
-const getCurrentNewsIndex = (currentNewsId, list) =>
-  list.findIndex((elem) => elem.newsId === currentNewsId);
+  return list.filter((e) => e.newsId === currentNewsId);
+};
+
+const getCurrentNewsIndex = (currentNewsId, list) => {
+  return list.findIndex((elem) => elem.newsId === currentNewsId);
+};
 
 const Containner = () => {
   const [data, setData] = useState({
@@ -115,6 +121,7 @@ const Containner = () => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+    setCurrentNewsPartsList([]);
     setCurrentNewsId('');
     setCurrentNewsIndex(0);
   };
@@ -147,7 +154,9 @@ const Containner = () => {
             </div>
           </div>
           <NewsList newsList={newsOnPageList} openModal={handleOpenModal} />
-          <div>{currentNewsId}</div>
+          <div className={s.progressBar}>
+            <div className={s.animation}></div>
+          </div>
         </div>
       </div>
       <div className={modalRootClassnames} onClick={handleCloseModal}>

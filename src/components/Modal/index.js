@@ -23,8 +23,6 @@ const Modal = ({
 
   const [currentPage, setCurrentPage] = useState({});
 
-  console.log('currentPage', currentPage);
-
   useEffect(() => {
     setCurrentPage(newsParts[currentPageIndex]);
   }, [currentPageIndex, newsParts]);
@@ -54,9 +52,19 @@ const Modal = ({
     e.stopPropagation();
   };
 
+  const classNamesTextContainer = (index) => {
+    const key = `text${index}`;
+    return cn(s[key]);
+  };
+
   const modalClassNames = cn(s.modal, {
     [s.open]: isOpen,
   });
+
+  const getProgressBarClassNames = (partId) =>
+    cn(s.progressBar, {
+      [s.active]: partId === currentPage.partId,
+    });
 
   const disabledButton = {
     left: currentNewsIndex === 0 && currentPageIndex === 0,
@@ -70,8 +78,8 @@ const Modal = ({
       {currentPage.textList &&
         currentPage.textList.map((elem, index) => {
           return (
-            <div className={s[`text${index}`]} key={elem.textId}>
-              {elem.text}
+            <div className={classNamesTextContainer(index)} key={elem.textId}>
+              <p>{elem.text}</p>
             </div>
           );
         })}
@@ -88,6 +96,13 @@ const Modal = ({
           ></button>
         </div>
       ))}
+      <div className={s.progressBarWrap}>
+        {newsParts.map(({ partId }) => (
+          <div className={s.progressBarContainer} key={partId}>
+            <div className={getProgressBarClassNames(partId)}></div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

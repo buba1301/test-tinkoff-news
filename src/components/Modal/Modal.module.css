@@ -1,3 +1,13 @@
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 30px;
+    background-color: #336fee;
+  }
+}
+
 .modal {
   position: relative;
   width: 365px;
@@ -47,17 +57,48 @@
   border-radius: 50%;
 }
 
-.text1 {
+.progressBarWrap {
+  position: absolute;
+  top: 10px;
+  left: 0;
   width: 100%;
-  height: 100px;
-  background-color: aqua;
+  height: 10px;
+
+  display: flex;
+  justify-content: space-between;
 }
 
-.text2 {
+.progressBarContainer {
+  width: 30px;
+  height: 100%;
+  border-radius: 5px;
+  background-color: rgba(240, 248, 255, 0.5);
+}
+
+.progressBar {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.progressBar.active {
+  animation-name: progress;
+  animation-duration: 5s;
+  animation-fill-mode: none;
+}
+
+.text0 {
+  width: 100%;
+  height: 100px;
+  background-color: rgb(14, 22, 30);
+  padding-top: 20px;
+}
+
+.text1 {
   background-color: darkblue;
 }
 
-.text3 {
+.text2 {
   width: 100%;
   height: 100px;
   background-color: aqua;
