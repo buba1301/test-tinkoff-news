@@ -95,20 +95,6 @@ const Containner = () => {
     setCurrentPage(currentPageValue);
   };
 
-  const handleCheckoutNextOrPrevNews = (direction) => {
-    const shiftNewsIndex = direction === 'right' ? 1 : -1;
-
-    const currentNewsIndex = getCurrentNewsIndex(currentNewsId, data.newsList);
-
-    const nextNewsIndex = currentNewsIndex + shiftNewsIndex;
-
-    setCurrentNewsIndex(nextNewsIndex);
-
-    const nextNewsId = data.newsList[nextNewsIndex].newsId;
-
-    setCurrentNewsId(nextNewsId);
-  };
-
   const handleOpenModal = (e) => {
     const currentNewsId = e.target.id;
 
@@ -124,6 +110,30 @@ const Containner = () => {
     setCurrentNewsPartsList([]);
     setCurrentNewsId('');
     setCurrentNewsIndex(0);
+  };
+
+  const handleCheckoutNextOrPrevNews = (direction) => {
+    const shiftNewsIndex = direction === 'right' ? 1 : -1;
+
+    const currentNewsIndex = getCurrentNewsIndex(currentNewsId, data.newsList);
+
+    console.log(
+      'currentNews Index',
+      currentNewsIndex === data.newsList.length - 1
+    );
+
+    if (currentNewsIndex === data.newsList.length - 1) {
+      handleCloseModal();
+      return;
+    }
+
+    const nextNewsIndex = currentNewsIndex + shiftNewsIndex;
+
+    setCurrentNewsIndex(nextNewsIndex);
+
+    const nextNewsId = data.newsList[nextNewsIndex].newsId;
+
+    setCurrentNewsId(nextNewsId);
   };
 
   const modalRootClassnames = cn(s.modalRoot, {
