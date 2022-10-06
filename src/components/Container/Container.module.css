@@ -54,10 +54,16 @@
   border: none;
   border-radius: 50%;
   background-color: #336fee;
+  box-shadow: 2px 2px 0 0 #110c0b;
+  transition: transform 0.5s;
 }
 
 .arrowButtonsWrap button:disabled {
   opacity: 0.5;
+}
+
+.arrowButtonsWrap button:active {
+  transform: scale(80%);
 }
 
 .progressBar {
