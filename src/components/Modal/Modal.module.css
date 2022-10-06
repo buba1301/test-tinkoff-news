@@ -30,7 +30,6 @@
 }
 
 .newsButtonArrows {
-  background: red;
   border-radius: 50%;
   box-sizing: border-box;
   height: 32px;
@@ -55,6 +54,17 @@
   cursor: pointer;
   border: none;
   border-radius: 50%;
+  background-color: #abbeea;
+  box-shadow: 2px 2px 0 0 #110c0b;
+  transition: transform 0.5s;
+}
+
+.newsButtonArrows button:active {
+  transform: scale(80%);
+}
+
+.newsButtonArrows button:disabled {
+  opacity: 0.5;
 }
 
 .progressBarWrap {
