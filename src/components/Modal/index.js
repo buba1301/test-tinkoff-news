@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
 import s from './Modal.module.css';
@@ -9,13 +9,12 @@ const arrowButtons = ['left', 'right'];
 
 //TODO: добавить кнопку закрытия модального окна (крестик вверзу справа)
 
-const getClassNamesButtonsArrow = (direction) =>
-  cn(s.newsButtonArrows, s[direction]);
+//TODO: добавить анимацию при смене части новости (более плавно)
 
 const Modal = ({
   newsParts,
   isOpen,
-  onClick,
+  checkoutNextOrPrevNews,
   currentNewsIndex,
   lastNewsIndex,
 }) => {
@@ -24,8 +23,24 @@ const Modal = ({
   const [currentPage, setCurrentPage] = useState({});
 
   useEffect(() => {
-    setCurrentPage(newsParts[currentPageIndex]);
+    if (currentPageIndex < newsParts.length) {
+      setCurrentPage(newsParts[currentPageIndex]);
+    }
   }, [currentPageIndex, newsParts]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentPageIndex((prevState) => prevState + 1);
+    }, 5000);
+
+    if (currentPageIndex === newsParts.length) {
+      const direction = 'right';
+      checkoutNextOrPrevNews(direction);
+      setCurrentPageIndex(0);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentPageIndex]);
 
   const handleClickButtonsArrow = (e) => {
     e.stopPropagation();
@@ -36,10 +51,10 @@ const Modal = ({
     const lastNewsPartIndex = newsParts.length - 1;
 
     if (currentPageIndex === lastNewsPartIndex) {
-      onClick(id);
+      checkoutNextOrPrevNews(id);
       setCurrentPageIndex(0);
     } else if (currentPageIndex === firstNewsParts && id === 'left') {
-      onClick(id);
+      checkoutNextOrPrevNews(id);
       setCurrentPageIndex(0);
     } else {
       setCurrentPageIndex((prevState) =>
@@ -56,6 +71,9 @@ const Modal = ({
     const key = `text${index}`;
     return cn(s[key]);
   };
+
+  const getClassNamesButtonsArrow = (direction) =>
+    cn(s.newsButtonArrows, s[direction]);
 
   const modalClassNames = cn(s.modal, {
     [s.open]: isOpen,

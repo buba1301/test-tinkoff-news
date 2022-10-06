@@ -164,7 +164,7 @@ const Containner = () => {
           <Modal
             newsParts={currentNewsPartList}
             isOpen={modalOpen}
-            onClick={handleCheckoutNextOrPrevNews}
+            checkoutNextOrPrevNews={handleCheckoutNextOrPrevNews}
             currentNewsIndex={currentNewsIndex}
             lastNewsIndex={data.newsList.length - 1}
           />
