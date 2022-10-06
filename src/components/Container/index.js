@@ -89,8 +89,9 @@ const Containner = () => {
   }, [currentNewsId]);
 
   const handleClickNextPageButton = (e) => {
+    const shift = 1;
     const currentPageValue =
-      e.target.id === 'next' ? currentPage + 1 : currentPage - 1;
+      e.target.id === 'next' ? currentPage + shift : currentPage - shift;
 
     setCurrentPage(currentPageValue);
   };
@@ -117,12 +118,9 @@ const Containner = () => {
 
     const currentNewsIndex = getCurrentNewsIndex(currentNewsId, data.newsList);
 
-    console.log(
-      'currentNews Index',
-      currentNewsIndex === data.newsList.length - 1
-    );
+    const isLastNews = currentNewsIndex === data.newsList.length - 1;
 
-    if (currentNewsIndex === data.newsList.length - 1) {
+    if (isLastNews) {
       handleCloseModal();
       return;
     }
