@@ -1,0 +1,19 @@
+.button {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+  background-color: #5b83e2;
+  box-shadow: 2px 2px 0 0 #110c0b;
+  transition: transform 0.5s;
+}
+
+.button:active {
+  transform: scale(80%);
+}
+
+.button:disabled {
+  opacity: 0.5;
+}

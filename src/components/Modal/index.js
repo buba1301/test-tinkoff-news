@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
 import s from './Modal.module.css';
+import Button from '../Button';
 
 const arrowButtons = ['left', 'right'];
 
@@ -107,11 +108,11 @@ const Modal = ({
           key={direction}
           id={direction}
         >
-          <button
+          <Button
             id={direction}
             onClick={handleClickButtonsArrow}
-            disabled={disabledButton[direction]}
-          ></button>
+            disable={disabledButton[direction]}
+          />
         </div>
       ))}
       <div className={s.progressBarWrap}>
@@ -126,3 +127,9 @@ const Modal = ({
 };
 
 export default Modal;
+
+/* <button
+            id={direction}
+            onClick={handleClickButtonsArrow}
+            disabled={disabledButton[direction]}
+          ></button> */
