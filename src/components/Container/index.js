@@ -7,6 +7,9 @@ import Modal from '../Modal';
 import s from './Container.module.css';
 
 import { useFetchData, useNewsOnPageList } from '../../hooks';
+import Button from '../Button';
+
+const buttons = ['prev', 'next'];
 
 const filterNewsPartsList = (list, currentNewsId) => {
   if (list.length === 0) {
@@ -91,6 +94,11 @@ const Containner = () => {
     [s.open]: modalOpen,
   });
 
+  const disabledButton = (direction) =>
+    direction === 'next'
+      ? currentPage === data.newsPagesCount
+      : currentPage === 1;
+
   return (
     <>
       <div className={s.newsContainer}>
@@ -98,26 +106,18 @@ const Containner = () => {
           <div className={s.header}>
             <h1>Для вас</h1>
             <div className={s.sliderArrows}>
-              <div className={s.arrowButtonsWrap}>
-                <button
-                  disabled={currentPage === 1}
-                  id='previous'
-                  onClick={handleClickNextPageButton}
-                ></button>
-              </div>
-              <div className={s.arrowButtonsWrap}>
-                <button
-                  disabled={currentPage === data.newsPagesCount}
-                  id='next'
-                  onClick={handleClickNextPageButton}
-                ></button>
-              </div>
+              {buttons.map((id) => (
+                <div className={s.arrowButtonsWrap} key={id}>
+                  <Button
+                    id={id}
+                    onClick={handleClickNextPageButton}
+                    disabled={disabledButton(id)}
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <NewsList newsList={newsOnPageList} openModal={handleOpenModal} />
-          <div className={s.progressBar}>
-            <div className={s.animation}></div>
-          </div>
         </div>
       </div>
       <div className={modalRootClassnames} onClick={handleCloseModal}>

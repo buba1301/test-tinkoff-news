@@ -6,11 +6,7 @@ import Button from '../Button';
 
 const arrowButtons = ['left', 'right'];
 
-//TODO: добавить кнопку закрытия модального окна (крестик вверзу справа)
-
 //TODO: добавить анимацию при смене части новости (более плавно)
-
-//TODO: выравнивание текста в блоках, растягивать под размер
 
 const Modal = ({
   newsParts,
@@ -127,9 +123,3 @@ const Modal = ({
 };
 
 export default Modal;
-
-/* <button
-            id={direction}
-            onClick={handleClickButtonsArrow}
-            disabled={disabledButton[direction]}
-          ></button> */

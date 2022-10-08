@@ -27,7 +27,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .header {
@@ -45,25 +45,6 @@
 .arrowButtonsWrap {
   width: 30px;
   height: 30px;
-}
-
-.arrowButtonsWrap button {
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  border: none;
-  border-radius: 50%;
-  background-color: #c4d0eb;
-  box-shadow: 2px 2px 0 0 #110c0b;
-  transition: transform 0.5s;
-}
-
-.arrowButtonsWrap button:disabled {
-  opacity: 0.5;
-}
-
-.arrowButtonsWrap button:active {
-  transform: scale(80%);
 }
 
 .progressBar {
