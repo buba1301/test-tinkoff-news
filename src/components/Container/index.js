@@ -1,26 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 
-import { mockApi } from '../../apimock';
 import NewsList from '../NewsList';
 import Modal from '../Modal';
 
 import s from './Container.module.css';
 
-const getNewsOnPageList = (newsOnPage, newsPagesCount) => {
-  let res = {};
-
-  let firstIndex = 0;
-  let lastIndex = newsOnPage;
-
-  for (let i = 0; i < newsPagesCount; i++) {
-    res = { ...res, [i + 1]: [firstIndex, lastIndex] };
-    firstIndex = firstIndex + newsOnPage;
-    lastIndex = lastIndex + newsOnPage;
-  }
-
-  return res;
-};
+import { useFetchData, useNewsOnPageList } from '../../hooks';
 
 const filterNewsPartsList = (list, currentNewsId) => {
   if (list.length === 0) {
@@ -35,52 +21,19 @@ const getCurrentNewsIndex = (currentNewsId, list) => {
 };
 
 const Containner = () => {
-  const [data, setData] = useState({
-    newsList: [],
-    newsPartsList: [],
-    newsPagesCount: 0,
-  });
-
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { data } = useFetchData();
+
+  const { newsOnPageList } = useNewsOnPageList(data, currentPage);
 
   const [currentNewsId, setCurrentNewsId] = useState('');
 
   const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
 
-  const [newsOnPage, setNewsOnPage] = useState({});
-
-  const [newsOnPageList, setNewsOnPageList] = useState([]);
-
   const [currentNewsPartList, setCurrentNewsPartsList] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await mockApi.getData();
-
-      setData(response);
-
-      const newsPagesCount = response.newsPagesCount;
-
-      const newsOnPage = response.newsList.length / response.newsPagesCount;
-
-      setNewsOnPage(() => getNewsOnPageList(newsOnPage, newsPagesCount));
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const startAndEndNewsIndexList = newsOnPage[currentPage];
-
-    const startNews = startAndEndNewsIndexList && startAndEndNewsIndexList[0];
-    const endNews = startAndEndNewsIndexList && startAndEndNewsIndexList[1];
-
-    const newsOnCurrentPageList = data.newsList.slice(startNews, endNews);
-
-    setNewsOnPageList(newsOnCurrentPageList);
-  }, [currentPage, data]);
 
   useEffect(() => {
     setCurrentNewsPartsList(
