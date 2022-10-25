@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const getNewsIndexOnPage = (newsOnPage, newsPagesCount, currentPage) => {
+/* const getNewsIndexOnPage = (newsOnPage, newsPagesCount, currentPage) => {
   let res = {};
 
   let startIndex = 0;
@@ -13,12 +13,23 @@ const getNewsIndexOnPage = (newsOnPage, newsPagesCount, currentPage) => {
   }
 
   return res[currentPage];
-};
+}; */
 
-export const useNewsOnPageList = (data, currentPage) => {
+export const useNewsOnPageList = (newsList, newsPagesCount, currentPage) => {
   const [newsOnPageList, setNewsOnPageList] = useState([]);
 
+  console.log('Renred useNewsOnPageList');
+
   useEffect(() => {
+    const newsCount = newsList.length / newsPagesCount;
+
+    const firstNewsIndex = currentPage * newsCount;
+    const lastNewsIndex = firstNewsIndex + newsCount;
+
+    setNewsOnPageList(newsList.slice(firstNewsIndex, lastNewsIndex));
+  }, [newsPagesCount, currentPage]);
+
+  /* useEffect(() => {
     if (data.newsList.length > 0) {
       const newsPagesCount = data.newsPagesCount;
 
@@ -37,7 +48,7 @@ export const useNewsOnPageList = (data, currentPage) => {
 
       setNewsOnPageList(newsOnCurrentPageList);
     }
-  }, [data, currentPage]);
+  }, [data, currentPage]); */
 
   return { newsOnPageList };
 };

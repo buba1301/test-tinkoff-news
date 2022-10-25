@@ -9,8 +9,6 @@ import s from './Container.module.css';
 import { useFetchData, useNewsOnPageList } from '../../hooks';
 import Button from '../Button';
 
-const buttons = ['prev', 'next'];
-
 const filterNewsPartsList = (list, currentNewsId) => {
   if (list.length === 0) {
     return [];
@@ -24,9 +22,22 @@ const getCurrentNewsIndex = (currentNewsId, list) => {
 };
 
 const Containner = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const { newsList, newsPartsList, newsPagesCount } = useFetchData();
+  console.log('RE-RENRER CONTAINER');
 
-  const { data } = useFetchData();
+  return (
+    <div className={s.newsContainer}>
+      <div className={s.newsWrap}>
+        <NewsList
+          newsList={newsList}
+          newsPartsList={newsPartsList}
+          newsPagesCount={newsPagesCount}
+        />
+      </div>
+    </div>
+  );
+
+  /* const [currentPage, setCurrentPage] = useState(1);
 
   const { newsOnPageList } = useNewsOnPageList(data, currentPage);
 
@@ -97,10 +108,14 @@ const Containner = () => {
   const disabledButton = (direction) =>
     direction === 'next'
       ? currentPage === data.newsPagesCount
-      : currentPage === 1;
+      : currentPage === 1; */
 
-  return (
-    <>
+  return <div>Render first</div>;
+};
+
+export default Containner;
+
+/* <>
       <div className={s.newsContainer}>
         <div className={s.newsWrap}>
           <div className={s.header}>
@@ -132,8 +147,4 @@ const Containner = () => {
           />
         )}
       </div>
-    </>
-  );
-};
-
-export default Containner;
+    </>*/

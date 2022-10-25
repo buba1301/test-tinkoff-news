@@ -19,6 +19,8 @@ const Modal = ({
 
   const [currentPage, setCurrentPage] = useState({});
 
+  console.log('RENRER MODAL');
+
   useEffect(() => {
     if (currentPageIndex < newsParts.length) {
       setCurrentPage(newsParts[currentPageIndex]);

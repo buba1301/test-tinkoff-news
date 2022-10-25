@@ -1,29 +1,22 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sliderArrows {
+  width: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.arrowButtonsWrap {
+  width: 30px;
+  height: 30px;
+}
+
 .newsWrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.newsCard {
-  width: 166px;
-  height: 166px;
-  border-radius: 10px;
-  background-color: cadetblue;
-  background-size: 166px 166px;
-  cursor: pointer;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  transition: transform 0.5s;
-}
-
-.newsCard:active {
-  transform: scale(80%);
-}
-
-.newsCard:hover {
-  transform: translateY(-5px);
 }
