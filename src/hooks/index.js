@@ -1,4 +1,4 @@
 import { useFetchData } from './useFetchData';
-import { useNewsOnPageList } from './useNewsOnPageList';
+import { useModal } from './useModal';
 
-export { useFetchData, useNewsOnPageList };
+export { useFetchData, useModal };

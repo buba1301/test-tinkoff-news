@@ -11,11 +11,17 @@ const arrowButtons = ['left', 'right'];
 const Modal = ({
   newsParts,
   isOpen,
+  onClosed,
   checkoutNextOrPrevNews,
   currentNewsIndex,
   lastNewsIndex,
 }) => {
-  const [currentPageIndex, setCurrentPageIndex] = useState(0);
+  return isOpen && <div className={s.modalBlanket} onClick={onClosed}></div>;
+};
+
+export default Modal;
+
+/* const [currentPageIndex, setCurrentPageIndex] = useState(0);
 
   const [currentPage, setCurrentPage] = useState({});
 
@@ -121,7 +127,4 @@ const Modal = ({
         ))}
       </div>
     </div>
-  );
-};
-
-export default Modal;
+  ); */

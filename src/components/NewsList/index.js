@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useNewsOnPageList } from '../../hooks';
 import Button from '../Button';
 import Card from '../Card';
 
