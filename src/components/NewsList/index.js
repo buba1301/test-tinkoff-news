@@ -7,12 +7,15 @@ import s from './NewsList.module.css';
 
 const buttons = ['prev', 'next'];
 
+const filterNewsPartsList = (newsPartsList, newsId) =>
+  newsPartsList.filter((p) => p.newsId === newsId);
+
 const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const lastPage = newsPagesCount - 1;
 
-  console.log('RENRER NEWS LIST');
+  console.log('RENRER NEWS LIST', newsPartsList);
 
   const newsCount = newsList.length / newsPagesCount;
 
@@ -56,6 +59,7 @@ const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
               newsId={newsId}
               background={background}
               key={newsId}
+              newsParts={filterNewsPartsList(newsPartsList, newsId)}
             />
           );
         })}

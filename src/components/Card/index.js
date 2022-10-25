@@ -2,7 +2,9 @@ import React from 'react';
 
 import s from './Cars.module.css';
 
-const Card = ({ newsName, newsId, background }) => {
+const Card = ({ newsName, newsId, background, newsParts }) => {
+  console.log('RENDER CARD');
+
   const style = {
     backgroundImage: `url(${background})`,
   };
