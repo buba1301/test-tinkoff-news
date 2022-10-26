@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useModal } from '../../hooks';
 import Button from '../Button';
+import CardWrap from '../Card';
 import Card from '../Card';
 
 import s from './NewsList.module.css';
@@ -51,17 +53,15 @@ const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
         </div>
       </div>
       <div className={s.newsWrap}>
-        {newsOnPageList.map(({ newsName, newsId, background }) => {
-          return (
-            <Card
-              newsName={newsName}
-              newsId={newsId}
-              background={background}
-              key={newsId}
-              newsParts={filterNewsPartsList(newsPartsList, newsId)}
-            />
-          );
-        })}
+        <CardWrap
+          // newsName={newsName}
+          // newsId={newsId}
+          // background={background}
+          // key={newsId}
+          // newsParts={filterNewsPartsList(newsPartsList, newsId)}
+          newsParts={newsPartsList}
+          newsOnPageList={newsOnPageList}
+        />
       </div>
     </>
   );

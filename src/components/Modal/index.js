@@ -45,15 +45,12 @@ const renderButtons = (handleClick, currentPart, lastPart) => {
   });
 };
 
-const Modal = ({
-  newsParts,
-  isOpen,
-  onClosed,
-  checkoutNextOrPrevNews,
-  currentNewsIndex,
-  lastNewsIndex,
-}) => {
+const Modal = ({ newsParts, isOpen, onClosed }) => {
   const [currentPart, setCurrentPart] = useState(0);
+
+  const ref = useRef();
+
+  console.log('RENDER MODal');
 
   const lastPart = newsParts.length - 1;
 
@@ -64,6 +61,7 @@ const Modal = ({
 
   const handleClickButton = (e) => {
     e.stopPropagation();
+    console.log('REF', ref.current.nextElementSibling.id);
     console.log('handleClick');
     const direction = e.target.id;
 
@@ -73,10 +71,8 @@ const Modal = ({
     setCurrentPart((prevState) => prevState + value);
   };
 
-  console.log('RENDER modal');
-
   return (
-    <div className={s.modalBlanket} onClick={onClosed}>
+    <div className={s.modalBlanket} onClick={onClosed} ref={ref}>
       <div className={s.modal}>
         {renderText(newsParts[currentPart], handleClickNewsLink)}
         {renderButtons(handleClickButton, currentPart, lastPart)}
