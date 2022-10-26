@@ -25,7 +25,11 @@ const renderText = (newsPart, onClick) => {
   });
 };
 
-const renderButtons = (handleClick) => {
+const renderButtons = (handleClick, currentPart, lastPart) => {
+  const firstPart = 0;
+
+  const disabledButton = currentPart === firstPart;
+
   return arrowButtons.map((direction) => {
     const classNamesButtonsArrow = cn(s.newsButtonArrows, s[direction]);
 
@@ -34,7 +38,7 @@ const renderButtons = (handleClick) => {
         <Button
           id={direction}
           onClick={handleClick}
-          // disable={disabledButton[direction]}
+          disabled={disabledButton && direction === 'left'}
         />
       </div>
     );
@@ -50,6 +54,8 @@ const Modal = ({
   lastNewsIndex,
 }) => {
   const [currentPart, setCurrentPart] = useState(0);
+
+  const lastPart = newsParts.length - 1;
 
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
@@ -73,7 +79,7 @@ const Modal = ({
     <div className={s.modalBlanket} onClick={onClosed}>
       <div className={s.modal}>
         {renderText(newsParts[currentPart], handleClickNewsLink)}
-        {renderButtons(handleClickButton)}
+        {renderButtons(handleClickButton, currentPart, lastPart)}
       </div>
     </div>
   );
