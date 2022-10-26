@@ -6,7 +6,7 @@ import s from './Cars.module.css';
 const Card = ({ newsName, newsId, background, newsParts }) => {
   console.log('RENDER CARD');
 
-  const { open, Dialog } = useModal();
+  const { open, Dialog } = useModal(newsParts);
 
   const style = {
     backgroundImage: `url(${background})`,
@@ -23,7 +23,7 @@ const Card = ({ newsName, newsId, background, newsParts }) => {
       >
         {newsName}
       </div>
-      {Dialog(newsParts)}
+      <Dialog />
     </>
   );
 };
