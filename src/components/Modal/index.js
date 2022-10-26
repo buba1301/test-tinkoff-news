@@ -6,7 +6,7 @@ import Button from '../Button';
 
 const arrowButtons = ['left', 'right'];
 
-const renderText = (newsPart) => {
+const renderText = (newsPart, onClick) => {
   return newsPart.textList.map((elem, index) => {
     const classNamesTextContainer = (index) => {
       const key = `text${index}`;
@@ -14,8 +14,28 @@ const renderText = (newsPart) => {
     };
 
     return (
-      <div className={classNamesTextContainer(index)} key={elem.textId}>
+      <div
+        className={classNamesTextContainer(index)}
+        key={elem.textId}
+        onClick={onClick}
+      >
         <p>{elem.text}</p>
+      </div>
+    );
+  });
+};
+
+const renderButtons = (handleClick) => {
+  return arrowButtons.map((direction) => {
+    const classNamesButtonsArrow = cn(s.newsButtonArrows, s[direction]);
+
+    return (
+      <div className={classNamesButtonsArrow} key={direction} id={direction}>
+        <Button
+          id={direction}
+          onClick={handleClick}
+          // disable={disabledButton[direction]}
+        />
       </div>
     );
   });
@@ -31,16 +51,29 @@ const Modal = ({
 }) => {
   const [currentPart, setCurrentPart] = useState(0);
 
-  const handleClickNewsLink = () => {
+  const handleClickNewsLink = (e) => {
+    e.stopPropagation();
     console.log('Click on link news');
+  };
+
+  const handleClickButton = (e) => {
+    e.stopPropagation();
+    console.log('handleClick');
+    const direction = e.target.id;
+
+    const shift = 1;
+
+    const value = direction === 'right' ? shift : -shift;
+    setCurrentPart((prevState) => prevState + value);
   };
 
   console.log('RENDER modal');
 
   return (
     <div className={s.modalBlanket} onClick={onClosed}>
-      <div className={s.modal} onClick={handleClickNewsLink}>
-        {renderText(newsParts[currentPart])}
+      <div className={s.modal}>
+        {renderText(newsParts[currentPart], handleClickNewsLink)}
+        {renderButtons(handleClickButton)}
       </div>
     </div>
   );

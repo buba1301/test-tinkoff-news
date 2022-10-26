@@ -49,6 +49,7 @@
   top: 50%;
   width: 32px;
   cursor: pointer;
+  z-index: 999;
 }
 
 .left {
