@@ -14,8 +14,17 @@ const Modal = ({
   currentNewsIndex,
   lastNewsIndex,
 }) => {
+  const handleClickNewsLink = () => {
+    console.log('Click on link news');
+  };
+
   console.log('RENDER modal', newsParts);
-  return isOpen && <div className={s.modalBlanket} onClick={onClosed}></div>;
+
+  return (
+    <div className={s.modalBlanket} onClick={onClosed}>
+      <div className={s.modal} onClick={handleClickNewsLink}></div>
+    </div>
+  );
 };
 
 export default Modal;
