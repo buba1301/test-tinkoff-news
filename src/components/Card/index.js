@@ -23,7 +23,7 @@ const Card = ({ newsName, newsId, background, newsParts }) => {
       >
         {newsName}
       </div>
-      <Dialog newsParts={newsParts} />
+      {Dialog(newsParts)}
     </>
   );
 };

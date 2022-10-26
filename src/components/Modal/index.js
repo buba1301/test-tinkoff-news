@@ -6,6 +6,21 @@ import Button from '../Button';
 
 const arrowButtons = ['left', 'right'];
 
+const renderText = (newsPart) => {
+  return newsPart.textList.map((elem, index) => {
+    const classNamesTextContainer = (index) => {
+      const key = `text${index}`;
+      return cn(s[key]);
+    };
+
+    return (
+      <div className={classNamesTextContainer(index)} key={elem.textId}>
+        <p>{elem.text}</p>
+      </div>
+    );
+  });
+};
+
 const Modal = ({
   newsParts,
   isOpen,
@@ -14,15 +29,19 @@ const Modal = ({
   currentNewsIndex,
   lastNewsIndex,
 }) => {
+  const [currentPart, setCurrentPart] = useState(0);
+
   const handleClickNewsLink = () => {
     console.log('Click on link news');
   };
 
-  console.log('RENDER modal', newsParts);
+  console.log('RENDER modal');
 
   return (
     <div className={s.modalBlanket} onClick={onClosed}>
-      <div className={s.modal} onClick={handleClickNewsLink}></div>
+      <div className={s.modal} onClick={handleClickNewsLink}>
+        {renderText(newsParts[currentPart])}
+      </div>
     </div>
   );
 };
@@ -78,11 +97,6 @@ export default Modal;
 
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
-  };
-
-  const classNamesTextContainer = (index) => {
-    const key = `text${index}`;
-    return cn(s[key]);
   };
 
   const getClassNamesButtonsArrow = (direction) =>
