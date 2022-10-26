@@ -6,8 +6,6 @@ import Button from '../Button';
 
 const arrowButtons = ['left', 'right'];
 
-//TODO: добавить анимацию при смене части новости (более плавно)
-
 const Modal = ({
   newsParts,
   isOpen,
@@ -16,6 +14,7 @@ const Modal = ({
   currentNewsIndex,
   lastNewsIndex,
 }) => {
+  console.log('RENDER modal', newsParts);
   return isOpen && <div className={s.modalBlanket} onClick={onClosed}></div>;
 };
 
