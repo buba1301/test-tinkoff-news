@@ -3,7 +3,7 @@ import { useModal } from '../../hooks';
 
 import s from './Cars.module.css';
 
-const Card = ({ newsName, newsId, background, newsParts, onClick }) => {
+const Card = ({ newsName, newsId, background, onClick }) => {
   console.log('RENDER CARD');
 
   // const { open, Dialog } = useModal(newsParts);
@@ -27,21 +27,19 @@ const Card = ({ newsName, newsId, background, newsParts, onClick }) => {
   );
 };
 
-const CardWrap = ({ newsOnPageList, newsParts }) => {
-  const [currentNews, setCurrentNews] = useState('');
+const CardWrap = ({ newsOnPageList, onClick }) => {
+  /* const filterNewsPartsList = (newsParts, newsId) =>
+    newsParts.filter(({ newsId }) => newsId === currentNews); */
 
-  const filterNewsPartsList = (newsParts, newsId) =>
-    newsParts.filter(({ newsId }) => newsId === currentNews);
+  // const { open, Dialog } = useModal(newsParts);
 
-  const { open, Dialog } = useModal(newsParts);
-
-  const handleClickOnCard = (e) => {
+  /* const handleClickOnCard = (e) => {
     console.log('handleClick', e.target.id);
-    open();
+    onClick();
     setCurrentNews(e.target.id);
-  };
+  }; */
 
-  console.log('RENDER CARD WRAP', newsOnPageList);
+  console.log('RENDER CARD WRAP');
 
   return (
     <>
@@ -51,13 +49,11 @@ const CardWrap = ({ newsOnPageList, newsParts }) => {
             newsName={newsName}
             newsId={newsId}
             background={background}
-            onClick={handleClickOnCard}
+            onClick={onClick}
             key={newsId}
-            newsParts={filterNewsPartsList(newsParts, newsId)}
           />
         );
       })}
-      <Dialog />
     </>
   );
 };

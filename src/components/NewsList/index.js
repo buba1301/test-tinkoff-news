@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ModalContext } from '../../context';
 import { useModal } from '../../hooks';
 import Button from '../Button';
 import CardWrap from '../Card';
@@ -14,16 +15,23 @@ const filterNewsPartsList = (newsPartsList, newsId) =>
 const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
-  const lastPage = newsPagesCount - 1;
+  const [currentNewsId, setCurrentNewsId] = useState('');
 
-  console.log('RENRER NEWS LIST', newsPartsList);
+  const { Dialog, open } = useModal();
+
+  console.log('RENRER NEWS LIST');
+
+  const lastPage = newsPagesCount - 1;
 
   const newsCount = newsList.length / newsPagesCount;
 
   const firstNewsIndex = currentPage * newsCount;
   const lastNewsIndex = firstNewsIndex + newsCount;
 
-  const newsOnPageList = newsList.slice(firstNewsIndex, lastNewsIndex);
+  const newsOnPageList = newsList.slice(
+    firstNewsIndex,
+    lastNewsIndex
+  );
 
   const handleClickChangePage = (e) => {
     const direction = e.target.id;
@@ -31,6 +39,12 @@ const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
 
     const value = direction === 'next' ? shift : -shift;
     setCurrentPage((prevState) => prevState + value);
+  };
+
+  const handleClickCard = (e) => {
+    console.log('NEws list click card', e.target.id);
+    open();
+    setCurrentNewsId(e.target.id);
   };
 
   return (
@@ -54,15 +68,13 @@ const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
       </div>
       <div className={s.newsWrap}>
         <CardWrap
-          // newsName={newsName}
-          // newsId={newsId}
-          // background={background}
-          // key={newsId}
-          // newsParts={filterNewsPartsList(newsPartsList, newsId)}
-          newsParts={newsPartsList}
           newsOnPageList={newsOnPageList}
+          onClick={handleClickCard}
         />
       </div>
+      <ModalContext.Provider value={{ newsPartsList, currentNewsId }}>
+        <Dialog />
+      </ModalContext.Provider>
     </>
   );
 

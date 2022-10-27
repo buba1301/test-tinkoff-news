@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react';
 
-export const newsPartsContext = createContext();
+export const ModalContext = createContext();
 
-export const NewsPartsProvider = ({ children }) => {
-  return <NewsParts.Provider value={[]}>{children}</NewsParts.Provider>;
-};
+/* export const ModalProvider = ({ children }) => {
+  return <Modal.Provider value={[]}>{children}</Modal.Provider>;
+};*/
