@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import { useModal } from '../../hooks';
+import React from 'react';
 
 import s from './Cars.module.css';
 
-const Card = ({ newsName, newsId, background, onClick }) => {
+const Card = ({ newsName, id, background, onClick }) => {
   console.log('RENDER CARD');
-
-  // const { open, Dialog } = useModal(newsParts);
 
   const style = {
     backgroundImage: `url(${background})`,
@@ -16,8 +13,8 @@ const Card = ({ newsName, newsId, background, onClick }) => {
     <>
       <div
         className={s.newsCard}
-        key={newsId}
-        id={newsId}
+        key={id}
+        id={id}
         onClick={onClick}
         style={style}
       >
@@ -28,29 +25,18 @@ const Card = ({ newsName, newsId, background, onClick }) => {
 };
 
 const CardWrap = ({ newsOnPageList, onClick }) => {
-  /* const filterNewsPartsList = (newsParts, newsId) =>
-    newsParts.filter(({ newsId }) => newsId === currentNews); */
-
-  // const { open, Dialog } = useModal(newsParts);
-
-  /* const handleClickOnCard = (e) => {
-    console.log('handleClick', e.target.id);
-    onClick();
-    setCurrentNews(e.target.id);
-  }; */
-
   console.log('RENDER CARD WRAP');
 
   return (
     <>
-      {newsOnPageList.map(({ newsName, newsId, background }) => {
+      {newsOnPageList.map(({ newsName, id, background }) => {
         return (
           <Card
             newsName={newsName}
-            newsId={newsId}
+            id={id}
             background={background}
             onClick={onClick}
-            key={newsId}
+            key={id}
           />
         );
       })}

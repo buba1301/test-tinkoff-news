@@ -2,16 +2,24 @@ import { useEffect, useState } from 'react';
 
 import { mockApi } from '../apimock/index';
 
-export const useFetchData = () => {
-  const [newsList, setNewsList] = useState([]);
-  const [newsPartsList, setNewsPartsList] = useState([]);
-  const [newsPagesCount, setNewsPageCount] = useState(0);
+const prepareData = (data) => {
+  return data.reduce(
+    (acc, elem) => {
+      acc.byId.push(elem);
+      acc.ids.push(elem.id);
+      return acc;
+    },
+    { byId: [], ids: [] }
+  );
+};
 
-  /* const [data, setData] = useState({
-    newsList: [],
-    newsPartsList: [],
-    newsPagesCount: 0,
-  }); */
+export const useFetchData = () => {
+  const [newsList, setNewsList] = useState({ byId: [], ids: [] });
+  const [newsPartsList, setNewsPartsList] = useState({
+    byId: [],
+    ids: [],
+  });
+  const [newsPagesCount, setNewsPageCount] = useState(0);
 
   console.log('Render useFetchData');
 
@@ -22,8 +30,8 @@ export const useFetchData = () => {
       const { newsList, newsPartsList, newsPagesCount } = response;
       // console.log(response);
       // setData(response);
-      setNewsList(newsList);
-      setNewsPartsList(newsPartsList);
+      setNewsList(prepareData(newsList));
+      setNewsPartsList(prepareData(newsPartsList));
       setNewsPageCount(newsPagesCount);
     };
 

@@ -18,7 +18,7 @@ const createList = (createFunc, count, parentId) => {
 
 const createText = (parentId) => {
   return {
-    textId: faker.datatype.uuid(),
+    id: faker.datatype.uuid(),
     partId: parentId,
     text: faker.lorem.text(),
   };
@@ -27,7 +27,7 @@ const createText = (parentId) => {
 const createNewsPart = (parentId) => {
   const partId = faker.datatype.uuid();
   return {
-    partId: partId,
+    id: partId,
     newsId: parentId,
     img: '',
     backgroundColor: '',
@@ -38,7 +38,7 @@ const createNewsPart = (parentId) => {
 
 const createNews = (newsId) => {
   return {
-    newsId: newsId,
+    id: newsId,
     newsName: faker.lorem.word(),
     background: faker.image.nature(1234, 2345, true),
   };

@@ -1,9 +1,4 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useContext, useState } from 'react';
 import cn from 'classnames';
 
 import s from './Modal.module.css';
@@ -61,15 +56,16 @@ const renderButtons = (handleClick, currentPart, lastPart) => {
 const Modal = ({ isOpen, onClosed }) => {
   const [currentPart, setCurrentPart] = useState(0);
 
-  const { newsPartsList, currentNewsId } = useContext(ModalContext);
+  const { newsPartsList, currentNewsId, newsIds, setCurrentNewsId } =
+    useContext(ModalContext);
 
-  console.log('RENDER MODal', currentPart);
-
-  const lastPart = newsPartsList.length - 1;
-
-  const currenNewsParts = newsPartsList.filter(
+  const currenNewsParts = newsPartsList.byId.filter(
     ({ newsId }) => newsId === currentNewsId
   );
+
+  const lastPart = currenNewsParts.length - 1;
+
+  console.log('RENDER MODal', currentPart);
 
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
@@ -78,13 +74,25 @@ const Modal = ({ isOpen, onClosed }) => {
 
   const handleClickButton = (e) => {
     e.stopPropagation();
-    // console.log('REF', ref.current.nextElementSibling.id);
-    console.log('handleClick', currentPart);
+    console.log('handleClick', currentPart, lastPart);
+
     const direction = e.target.id;
 
     const shift = 1;
 
     const value = direction === 'right' ? shift : -shift;
+
+    if (currentPart === lastPart) {
+      const currentNewsIndex = newsIds.indexOf(currentNewsId);
+      const nextNewsIndex = currentNewsIndex + value;
+
+      setCurrentNewsId(newsIds[nextNewsIndex]);
+      setCurrentPart(0);
+
+      console.log('Last psrt');
+      return;
+    }
+
     setCurrentPart((prevState) => prevState + value);
   };
 
