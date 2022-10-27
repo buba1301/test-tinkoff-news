@@ -5,6 +5,9 @@ import s from './Modal.module.css';
 import Button from '../Button';
 import { ModalContext } from '../../context';
 
+//TODO: Блоки кнопок когда первая новость (левая) и последняя новость (правая)
+//TODO: Прогресс бар и переключение частей новости и затем преерключение на следующую новость если часть последняя
+
 const arrowButtons = ['left', 'right'];
 
 const renderText = (newsPart, onClick) => {
@@ -42,6 +45,7 @@ const renderButtons = (handleClick, currentPart, lastPart) => {
         className={classNamesButtonsArrow}
         key={direction}
         id={direction}
+        key={direction}
       >
         <Button
           id={direction}
