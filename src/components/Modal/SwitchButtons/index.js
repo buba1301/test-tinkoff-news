@@ -32,8 +32,6 @@ const SwitchButtons = ({
 
   const firstPart = 0;
 
-  const disabledButton = currentPartIndex === firstPart;
-
   const currentNewsIndex = newsIds.indexOf(currentNewsId);
 
   const handleClickButton = (e) => {
@@ -60,6 +58,13 @@ const SwitchButtons = ({
     setcurrentPartIndex((prevState) => prevState + value);
   };
 
+  const disabledLeftButton =
+    currentPartIndex === firstPart && currentNewsIndex === 0;
+
+  const disabledRightButton =
+    currentPartIndex === lastPart &&
+    currentNewsIndex === newsIds.length - 1;
+
   return arrowButtons.map((direction) => {
     const classNamesButtonsArrow = cn(
       s.newsButtonArrows,
@@ -75,7 +80,11 @@ const SwitchButtons = ({
         <Button
           id={direction}
           onClick={handleClickButton}
-          disabled={disabledButton && direction === 'left'}
+          disabled={
+            direction === 'left'
+              ? disabledLeftButton
+              : disabledRightButton
+          }
         />
       </div>
     );

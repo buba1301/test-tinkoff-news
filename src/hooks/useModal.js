@@ -7,7 +7,7 @@ export const useModal = () => {
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
   const Dialog = () =>
-    isOpen && <Modal onClosed={close} isOpen={isOpen} />;
+    isOpen && <Modal onClosed={close} isOpen={isOpen} close={close} />;
 
   return { isOpen, Dialog, open, close };
 };

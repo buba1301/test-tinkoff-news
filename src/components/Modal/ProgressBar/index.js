@@ -24,6 +24,7 @@ const ProgressBar = ({
   currentPartIndex,
   lastPart,
   setcurrentPartIndex,
+  closeModal,
 }) => {
   console.log('Render Progress', newsParts);
 
@@ -35,6 +36,12 @@ const ProgressBar = ({
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (currentPartIndex === lastPart) {
+        if (currentNewsIndex === newsIds.length - 1) {
+          closeModal();
+          setcurrentPartIndex(0);
+          setCurrentNewsId('');
+          return;
+        }
         checkoutToNextNews(
           currentNewsIndex,
           newsIds,
