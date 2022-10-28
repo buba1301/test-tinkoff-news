@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import s from './Modal.module.css';
@@ -57,6 +57,22 @@ const renderButtons = (handleClick, currentPart, lastPart) => {
   });
 };
 
+const checkoutToNextNews = (
+  currentNewsIndex,
+  newsIds,
+  shift,
+  setCurrentNewsId,
+  setcurrentPartIndex,
+  direction = 'right'
+) => {
+  const value = direction === 'right' ? shift : -shift;
+
+  const nextNewsIndex = currentNewsIndex + value;
+
+  setCurrentNewsId(newsIds[nextNewsIndex]);
+  setcurrentPartIndex(0);
+};
+
 const Modal = ({ isOpen, onClosed }) => {
   const [currentPartIndex, setcurrentPartIndex] = useState(0);
 
@@ -71,7 +87,31 @@ const Modal = ({ isOpen, onClosed }) => {
 
   const lastPart = currenNewsParts.length - 1;
 
+  const currentNewsIndex = newsIds.indexOf(currentNewsId);
+
   console.log('RENDER MODal', currentPartIndex);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      if (currentPartIndex === lastPart) {
+        const shift = 1;
+        checkoutToNextNews(
+          currentNewsIndex,
+          newsIds,
+          shift,
+          setCurrentNewsId,
+          setcurrentPartIndex
+        );
+        return;
+      }
+
+      setcurrentPartIndex((prevState) => prevState + 1);
+    }, 5000);
+
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [currentPartIndex]);
 
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
@@ -89,13 +129,14 @@ const Modal = ({ isOpen, onClosed }) => {
     const value = direction === 'right' ? shift : -shift;
 
     if (currentPartIndex === lastPart) {
-      const currentNewsIndex = newsIds.indexOf(currentNewsId);
-      const nextNewsIndex = currentNewsIndex + value;
-
-      setCurrentNewsId(newsIds[nextNewsIndex]);
-      setcurrentPartIndex(0);
-
-      console.log('Last psrt');
+      checkoutToNextNews(
+        currentNewsIndex,
+        newsIds,
+        shift,
+        setCurrentNewsId,
+        setcurrentPartIndex,
+        direction
+      );
       return;
     }
 
