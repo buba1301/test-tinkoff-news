@@ -11,47 +11,18 @@ import SwitchButtons from './SwitchButtons';
 //TODO: Блоки кнопок когда первая новость (левая) и последняя новость (правая)
 //TODO: Прогресс бар и переключение частей новости и затем преерключение на следующую новость если часть последняя
 
-/* const renderButtons = (handleClick, currentPart, lastPart) => {
-  const firstPart = 0;
-
-  const disabledButton = currentPart === firstPart;
-
-  return arrowButtons.map((direction) => {
-    const classNamesButtonsArrow = cn(
-      s.newsButtonArrows,
-      s[direction]
-    );
-
-    return (
-      <div
-        className={classNamesButtonsArrow}
-        key={direction}
-        id={direction}
-      >
-        <Button
-          id={direction}
-          onClick={handleClick}
-          disabled={disabledButton && direction === 'left'}
-        />
-      </div>
-    );
-  });
-}; */
-
 const checkoutToNextNews = (
   currentNewsIndex,
   newsIds,
-  shift,
   setCurrentNewsId,
-  setcurrentPartIndex,
   direction = 'right'
 ) => {
+  const shift = 1;
   const value = direction === 'right' ? shift : -shift;
 
   const nextNewsIndex = currentNewsIndex + value;
 
   setCurrentNewsId(newsIds[nextNewsIndex]);
-  setcurrentPartIndex(0);
 };
 
 const Modal = ({ isOpen, onClosed }) => {
@@ -76,13 +47,13 @@ const Modal = ({ isOpen, onClosed }) => {
     const timerId = setTimeout(() => {
       if (currentPartIndex === lastPart) {
         const shift = 1;
+
         checkoutToNextNews(
           currentNewsIndex,
           newsIds,
-          shift,
-          setCurrentNewsId,
-          setcurrentPartIndex
+          setCurrentNewsId
         );
+        setcurrentPartIndex(0);
         return;
       }
 
@@ -101,25 +72,24 @@ const Modal = ({ isOpen, onClosed }) => {
 
   const handleClickButton = (e) => {
     e.stopPropagation();
-    console.log('handleClick', currentPartIndex, lastPart);
+    console.log('handleClick');
 
     const direction = e.target.id;
-
-    const shift = 1;
-
-    const value = direction === 'right' ? shift : -shift;
 
     if (currentPartIndex === lastPart) {
       checkoutToNextNews(
         currentNewsIndex,
         newsIds,
-        shift,
         setCurrentNewsId,
-        setcurrentPartIndex,
         direction
       );
+      setcurrentPartIndex(0);
       return;
     }
+
+    const shift = 1;
+
+    const value = direction === 'right' ? shift : -shift;
 
     setcurrentPartIndex((prevState) => prevState + value);
   };
