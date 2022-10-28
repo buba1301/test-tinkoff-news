@@ -14,8 +14,8 @@ const ProgressBar = ({ newsParts, active }) => {
         });
 
         return (
-          <div className={s.progressBarContainer}>
-            <div className={classNames} key={id} />
+          <div className={s.progressBarContainer} key={id}>
+            <div className={classNames} />
           </div>
         );
       })}

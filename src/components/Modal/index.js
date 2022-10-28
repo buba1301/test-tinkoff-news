@@ -6,13 +6,12 @@ import Button from '../Button';
 import { ModalContext } from '../../context';
 import ProgressBar from './ProgressBar';
 import NewsText from './NewsText';
+import SwitchButtons from './SwitchButtons';
 
 //TODO: Блоки кнопок когда первая новость (левая) и последняя новость (правая)
 //TODO: Прогресс бар и переключение частей новости и затем преерключение на следующую новость если часть последняя
 
-const arrowButtons = ['left', 'right'];
-
-const renderButtons = (handleClick, currentPart, lastPart) => {
+/* const renderButtons = (handleClick, currentPart, lastPart) => {
   const firstPart = 0;
 
   const disabledButton = currentPart === firstPart;
@@ -37,7 +36,7 @@ const renderButtons = (handleClick, currentPart, lastPart) => {
       </div>
     );
   });
-};
+}; */
 
 const checkoutToNextNews = (
   currentNewsIndex,
@@ -136,8 +135,11 @@ const Modal = ({ isOpen, onClosed }) => {
           textList={currenNewsPart.textList}
           onClick={handleClickNewsLink}
         />
-
-        {renderButtons(handleClickButton, currentPartIndex, lastPart)}
+        <SwitchButtons
+          onClick={handleClickButton}
+          currentPartIndex={currentPartIndex}
+          lastPart={lastPart}
+        />
       </div>
     </div>
   );
