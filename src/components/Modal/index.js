@@ -4,6 +4,7 @@ import cn from 'classnames';
 import s from './Modal.module.css';
 import Button from '../Button';
 import { ModalContext } from '../../context';
+import ProgressBar from '../ProgressBar';
 
 //TODO: Блоки кнопок когда первая новость (левая) и последняя новость (правая)
 //TODO: Прогресс бар и переключение частей новости и затем преерключение на следующую новость если часть последняя
@@ -45,7 +46,6 @@ const renderButtons = (handleClick, currentPart, lastPart) => {
         className={classNamesButtonsArrow}
         key={direction}
         id={direction}
-        key={direction}
       >
         <Button
           id={direction}
@@ -58,7 +58,7 @@ const renderButtons = (handleClick, currentPart, lastPart) => {
 };
 
 const Modal = ({ isOpen, onClosed }) => {
-  const [currentPart, setCurrentPart] = useState(0);
+  const [currentPartIndex, setcurrentPartIndex] = useState(0);
 
   const { newsPartsList, currentNewsId, newsIds, setCurrentNewsId } =
     useContext(ModalContext);
@@ -67,9 +67,11 @@ const Modal = ({ isOpen, onClosed }) => {
     ({ newsId }) => newsId === currentNewsId
   );
 
+  const currenNewsPart = currenNewsParts[currentPartIndex];
+
   const lastPart = currenNewsParts.length - 1;
 
-  console.log('RENDER MODal', currentPart);
+  console.log('RENDER MODal', currentPartIndex);
 
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
@@ -78,7 +80,7 @@ const Modal = ({ isOpen, onClosed }) => {
 
   const handleClickButton = (e) => {
     e.stopPropagation();
-    console.log('handleClick', currentPart, lastPart);
+    console.log('handleClick', currentPartIndex, lastPart);
 
     const direction = e.target.id;
 
@@ -86,28 +88,29 @@ const Modal = ({ isOpen, onClosed }) => {
 
     const value = direction === 'right' ? shift : -shift;
 
-    if (currentPart === lastPart) {
+    if (currentPartIndex === lastPart) {
       const currentNewsIndex = newsIds.indexOf(currentNewsId);
       const nextNewsIndex = currentNewsIndex + value;
 
       setCurrentNewsId(newsIds[nextNewsIndex]);
-      setCurrentPart(0);
+      setcurrentPartIndex(0);
 
       console.log('Last psrt');
       return;
     }
 
-    setCurrentPart((prevState) => prevState + value);
+    setcurrentPartIndex((prevState) => prevState + value);
   };
 
   return (
     <div className={s.modalBlanket} onClick={onClosed}>
       <div className={s.modal}>
-        {renderText(
-          currenNewsParts[currentPart],
-          handleClickNewsLink
-        )}
-        {renderButtons(handleClickButton, currentPart, lastPart)}
+        <ProgressBar
+          newsParts={currenNewsParts}
+          active={currenNewsPart.id}
+        />
+        {renderText(currenNewsPart, handleClickNewsLink)}
+        {renderButtons(handleClickButton, currentPartIndex, lastPart)}
       </div>
     </div>
   );
