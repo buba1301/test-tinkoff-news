@@ -43,32 +43,15 @@ const Modal = ({ isOpen, onClosed }) => {
 
   console.log('RENDER MODal', currentPartIndex);
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      if (currentPartIndex === lastPart) {
-        checkoutToNextNews(
-          currentNewsIndex,
-          newsIds,
-          setCurrentNewsId
-        );
-        setcurrentPartIndex(0);
-        return;
-      }
-
-      setcurrentPartIndex((prevState) => prevState + 1);
-    }, 5000);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [currentPartIndex]);
-
   return (
     <div className={s.modalBlanket} onClick={onClosed}>
       <div className={s.modal}>
         <ProgressBar
+          currentPartIndex={currentPartIndex}
+          lastPart={lastPart}
           newsParts={currenNewsParts}
           active={currenNewsPart.id}
+          setcurrentPartIndex={setcurrentPartIndex}
         />
         <NewsText textList={currenNewsPart.textList} />
         <SwitchButtons
