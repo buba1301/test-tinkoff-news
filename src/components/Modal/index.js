@@ -4,31 +4,13 @@ import cn from 'classnames';
 import s from './Modal.module.css';
 import Button from '../Button';
 import { ModalContext } from '../../context';
-import ProgressBar from '../ProgressBar';
+import ProgressBar from './ProgressBar';
+import NewsText from './NewsText';
 
 //TODO: Блоки кнопок когда первая новость (левая) и последняя новость (правая)
 //TODO: Прогресс бар и переключение частей новости и затем преерключение на следующую новость если часть последняя
 
 const arrowButtons = ['left', 'right'];
-
-const renderText = (newsPart, onClick) => {
-  return newsPart.textList.map((elem, index) => {
-    const classNamesTextContainer = (index) => {
-      const key = `text${index}`;
-      return cn(s[key]);
-    };
-
-    return (
-      <div
-        className={classNamesTextContainer(index)}
-        key={elem.textId}
-        onClick={onClick}
-      >
-        <p>{elem.text}</p>
-      </div>
-    );
-  });
-};
 
 const renderButtons = (handleClick, currentPart, lastPart) => {
   const firstPart = 0;
@@ -150,7 +132,11 @@ const Modal = ({ isOpen, onClosed }) => {
           newsParts={currenNewsParts}
           active={currenNewsPart.id}
         />
-        {renderText(currenNewsPart, handleClickNewsLink)}
+        <NewsText
+          textList={currenNewsPart.textList}
+          onClick={handleClickNewsLink}
+        />
+
         {renderButtons(handleClickButton, currentPartIndex, lastPart)}
       </div>
     </div>
