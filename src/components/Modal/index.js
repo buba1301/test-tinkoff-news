@@ -46,8 +46,6 @@ const Modal = ({ isOpen, onClosed }) => {
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (currentPartIndex === lastPart) {
-        const shift = 1;
-
         checkoutToNextNews(
           currentNewsIndex,
           newsIds,
@@ -70,30 +68,6 @@ const Modal = ({ isOpen, onClosed }) => {
     console.log('Click on link news');
   };
 
-  const handleClickButton = (e) => {
-    e.stopPropagation();
-    console.log('handleClick');
-
-    const direction = e.target.id;
-
-    if (currentPartIndex === lastPart) {
-      checkoutToNextNews(
-        currentNewsIndex,
-        newsIds,
-        setCurrentNewsId,
-        direction
-      );
-      setcurrentPartIndex(0);
-      return;
-    }
-
-    const shift = 1;
-
-    const value = direction === 'right' ? shift : -shift;
-
-    setcurrentPartIndex((prevState) => prevState + value);
-  };
-
   return (
     <div className={s.modalBlanket} onClick={onClosed}>
       <div className={s.modal}>
@@ -106,9 +80,9 @@ const Modal = ({ isOpen, onClosed }) => {
           onClick={handleClickNewsLink}
         />
         <SwitchButtons
-          onClick={handleClickButton}
           currentPartIndex={currentPartIndex}
           lastPart={lastPart}
+          setcurrentPartIndex={setcurrentPartIndex}
         />
       </div>
     </div>
