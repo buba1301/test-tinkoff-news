@@ -5,22 +5,9 @@ import s from './SwitchButtons.module.css';
 
 import Button from '../../Button';
 import { ModalContext } from '../../../context';
+import checkoutToNextNews from '../utils';
 
 const arrowButtons = ['left', 'right'];
-
-const checkoutToNextNews = (
-  currentNewsIndex,
-  newsIds,
-  setCurrentNewsId,
-  direction = 'right'
-) => {
-  const shift = 1;
-  const value = direction === 'right' ? shift : -shift;
-
-  const nextNewsIndex = currentNewsIndex + value;
-
-  setCurrentNewsId(newsIds[nextNewsIndex]);
-};
 
 const SwitchButtons = ({
   currentPartIndex,

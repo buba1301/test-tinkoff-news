@@ -3,20 +3,7 @@ import cn from 'classnames';
 
 import s from './ProgressBar.module.css';
 import { ModalContext } from '../../../context';
-
-const checkoutToNextNews = (
-  currentNewsIndex,
-  newsIds,
-  setCurrentNewsId,
-  direction = 'right'
-) => {
-  const shift = 1;
-  const value = direction === 'right' ? shift : -shift;
-
-  const nextNewsIndex = currentNewsIndex + value;
-
-  setCurrentNewsId(newsIds[nextNewsIndex]);
-};
+import checkoutToNextNews from '../utils';
 
 const ProgressBar = ({
   newsParts,
