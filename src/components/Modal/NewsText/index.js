@@ -3,7 +3,12 @@ import cn from 'classnames';
 
 import s from './NewsText.module.css';
 
-const NewsText = ({ textList, onClick }) => {
+const NewsText = ({ textList }) => {
+  const handleClickNewsLink = (e) => {
+    e.stopPropagation();
+    console.log('Click on link news');
+  };
+
   return textList.map((elem, index) => {
     const classNamesTextContainer = (index) => {
       const key = `text${index}`;
@@ -14,7 +19,7 @@ const NewsText = ({ textList, onClick }) => {
       <div
         className={classNamesTextContainer(index)}
         key={elem.id}
-        onClick={onClick}
+        onClick={handleClickNewsLink}
       >
         <p>{elem.text}</p>
       </div>

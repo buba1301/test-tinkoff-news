@@ -34,9 +34,9 @@ const SwitchButtons = ({
 
   const disabledButton = currentPartIndex === firstPart;
 
-  const currenNewsParts = newsPartsList.byId.filter(
+  /* const currenNewsParts = newsPartsList.byId.filter(
     ({ newsId }) => newsId === currentNewsId
-  );
+  );*/
 
   // const currenNewsPart = currenNewsParts[currentPartIndex];
 

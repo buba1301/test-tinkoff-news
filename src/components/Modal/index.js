@@ -63,11 +63,6 @@ const Modal = ({ isOpen, onClosed }) => {
     };
   }, [currentPartIndex]);
 
-  const handleClickNewsLink = (e) => {
-    e.stopPropagation();
-    console.log('Click on link news');
-  };
-
   return (
     <div className={s.modalBlanket} onClick={onClosed}>
       <div className={s.modal}>
@@ -75,10 +70,7 @@ const Modal = ({ isOpen, onClosed }) => {
           newsParts={currenNewsParts}
           active={currenNewsPart.id}
         />
-        <NewsText
-          textList={currenNewsPart.textList}
-          onClick={handleClickNewsLink}
-        />
+        <NewsText textList={currenNewsPart.textList} />
         <SwitchButtons
           currentPartIndex={currentPartIndex}
           lastPart={lastPart}
