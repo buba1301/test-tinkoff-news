@@ -27,7 +27,7 @@ const ProgressBar = ({
 }) => {
   console.log('Render Progress', newsParts);
 
-  const { newsPartsList, currentNewsId, newsIds, setCurrentNewsId } =
+  const { currentNewsId, newsIds, setCurrentNewsId } =
     useContext(ModalContext);
 
   const currentNewsIndex = newsIds.indexOf(currentNewsId);

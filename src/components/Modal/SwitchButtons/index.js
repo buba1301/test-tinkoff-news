@@ -27,18 +27,12 @@ const SwitchButtons = ({
   lastPart,
   setcurrentPartIndex,
 }) => {
-  const { newsPartsList, currentNewsId, newsIds, setCurrentNewsId } =
+  const { currentNewsId, newsIds, setCurrentNewsId } =
     useContext(ModalContext);
 
   const firstPart = 0;
 
   const disabledButton = currentPartIndex === firstPart;
-
-  /* const currenNewsParts = newsPartsList.byId.filter(
-    ({ newsId }) => newsId === currentNewsId
-  );*/
-
-  // const currenNewsPart = currenNewsParts[currentPartIndex];
 
   const currentNewsIndex = newsIds.indexOf(currentNewsId);
 
