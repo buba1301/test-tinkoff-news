@@ -2,7 +2,9 @@ import React, { useContext, useEffect } from 'react';
 import cn from 'classnames';
 
 import s from './ProgressBar.module.css';
+
 import { ModalContext } from '../../../context';
+
 import checkoutToNextNews from '../utils';
 
 const ProgressBar = ({
@@ -29,11 +31,13 @@ const ProgressBar = ({
           setCurrentNewsId('');
           return;
         }
+
         checkoutToNextNews(
           currentNewsIndex,
           newsIds,
           setCurrentNewsId
         );
+
         setcurrentPartIndex(0);
         return;
       }

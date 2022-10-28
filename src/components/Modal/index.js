@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
 
 import s from './Modal.module.css';
+
 import { ModalContext } from '../../context';
+
 import ProgressBar from './ProgressBar';
 import NewsText from './NewsText';
 import SwitchButtons from './SwitchButtons';
-
-//TODO: Блоки кнопок когда первая новость (левая) и последняя новость (правая)
-//TODO: Прогресс бар и переключение частей новости и затем преерключение на следующую новость если часть последняя
 
 const Modal = ({ isOpen, onClosed, close }) => {
   const [currentPartIndex, setcurrentPartIndex] = useState(0);

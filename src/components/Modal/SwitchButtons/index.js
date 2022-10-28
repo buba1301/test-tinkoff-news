@@ -4,7 +4,9 @@ import cn from 'classnames';
 import s from './SwitchButtons.module.css';
 
 import Button from '../../Button';
+
 import { ModalContext } from '../../../context';
+
 import checkoutToNextNews from '../utils';
 
 const arrowButtons = ['left', 'right'];
@@ -45,10 +47,10 @@ const SwitchButtons = ({
     setcurrentPartIndex((prevState) => prevState + value);
   };
 
-  const disabledLeftButton =
+  const disabledLeftBtn =
     currentPartIndex === firstPart && currentNewsIndex === 0;
 
-  const disabledRightButton =
+  const disabledRightBtn =
     currentPartIndex === lastPart &&
     currentNewsIndex === newsIds.length - 1;
 
@@ -68,9 +70,7 @@ const SwitchButtons = ({
           id={direction}
           onClick={handleClickButton}
           disabled={
-            direction === 'left'
-              ? disabledLeftButton
-              : disabledRightButton
+            direction === 'left' ? disabledLeftBtn : disabledRightBtn
           }
         />
       </div>
