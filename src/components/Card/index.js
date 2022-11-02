@@ -3,9 +3,9 @@ import React from 'react';
 import s from './Cars.module.css';
 
 const Card = ({ newsName, id, background, onClick }) => {
-  const style = {
+  /*const style = {
     backgroundImage: `url(${background})`,
-  };
+  };*/
 
   return (
     <>
@@ -14,7 +14,7 @@ const Card = ({ newsName, id, background, onClick }) => {
         key={id}
         id={id}
         onClick={onClick}
-        style={style}
+        // style={style}
       >
         {newsName}
       </div>
@@ -25,12 +25,12 @@ const Card = ({ newsName, id, background, onClick }) => {
 const CardWrap = ({ newsOnPageList, onClick }) => {
   return (
     <>
-      {newsOnPageList.map(({ newsName, id, background }) => {
+      {newsOnPageList.map(({ newsName, id }) => {
         return (
           <Card
             newsName={newsName}
             id={id}
-            background={background}
+            // background={background}
             onClick={onClick}
             key={id}
           />

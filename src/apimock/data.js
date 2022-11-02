@@ -40,7 +40,7 @@ const createNews = (newsId) => {
   return {
     id: newsId,
     newsName: faker.lorem.word(),
-    background: faker.image.nature(1234, 2345, true),
+    // background: faker.image.nature(1234, 2345, true),
   };
 };
 
