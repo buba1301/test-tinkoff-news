@@ -43,6 +43,7 @@ const SwitchButtons = ({
         setCurrentNewsId,
         direction
       );
+
       setcurrentPartIndex(0);
       return;
     }

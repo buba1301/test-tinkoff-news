@@ -20,13 +20,14 @@ const ProgressBar = ({
 
   const currentNewsIndex = newsIds.indexOf(currentNewsId);
 
-  const isLastPart = currentNewsIndex === lastPart;
+  const isLastPart = currentPartIndex === lastPart;
   const isLastNews = currentNewsIndex === newsIds.length - 1;
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (isLastPart) {
         if (isLastNews) {
+          console.log('!!!');
           closeModal();
           setcurrentPartIndex(0);
           setCurrentNewsId('');
