@@ -6,7 +6,6 @@ import s from './NewsText.module.css';
 const NewsText = ({ textList }) => {
   const handleClickNewsLink = (e) => {
     e.stopPropagation();
-    console.log('Click on link news');
   };
 
   return textList.map((elem, index) => {

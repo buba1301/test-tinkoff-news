@@ -8,7 +8,6 @@ import { useFetchData } from '../../hooks';
 
 const Containner = () => {
   const { newsList, newsPartsList, newsPagesCount } = useFetchData();
-  console.log('RE-RENRER CONTAINER', newsList);
 
   return (
     <div className={s.newsContainer}>

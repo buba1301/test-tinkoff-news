@@ -15,8 +15,6 @@ const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
 
   const { Dialog, open } = useModal();
 
-  console.log('RENRER NEWS LIST', newsList);
-
   const lastPage = newsPagesCount - 1;
 
   const newsCount = newsList.ids.length / newsPagesCount;
@@ -38,7 +36,6 @@ const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
   };
 
   const handleClickCard = (e) => {
-    console.log('NEws list click card', e.target.id);
     open();
     setCurrentNewsId(e.target.id);
   };
@@ -55,7 +52,7 @@ const NewsList = ({ newsList, newsPartsList, newsPagesCount }) => {
                 onClick={handleClickChangePage}
                 disabled={
                   (id === 'prev' && currentPage === 0) ||
-                  (id === 'next') & (currentPage === lastPage)
+                  (id === 'next' && currentPage === lastPage)
                 }
               />
             </div>

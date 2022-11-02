@@ -15,10 +15,10 @@ const ProgressBar = ({
   setcurrentPartIndex,
   closeModal,
 }) => {
-  console.log('Render Progress', newsParts);
-
   const { currentNewsId, newsIds, setCurrentNewsId } =
     useContext(ModalContext);
+
+  console.log('Active', active);
 
   const currentNewsIndex = newsIds.indexOf(currentNewsId);
 

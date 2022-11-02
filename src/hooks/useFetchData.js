@@ -21,15 +21,11 @@ export const useFetchData = () => {
   });
   const [newsPagesCount, setNewsPageCount] = useState(0);
 
-  console.log('Render useFetchData');
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await mockApi.getData();
 
       const { newsList, newsPartsList, newsPagesCount } = response;
-      // console.log(response);
-      // setData(response);
       setNewsList(prepareData(newsList));
       setNewsPartsList(prepareData(newsPartsList));
       setNewsPageCount(newsPagesCount);

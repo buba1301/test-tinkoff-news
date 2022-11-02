@@ -7,7 +7,7 @@ import Button from '../../Button';
 
 import { ModalContext } from '../../../context';
 
-import checkoutToNextNews from '../utils';
+import checkoutNews from '../utils';
 
 const arrowButtons = ['left', 'right'];
 
@@ -25,12 +25,15 @@ const SwitchButtons = ({
 
   const handleClickButton = (e) => {
     e.stopPropagation();
-    console.log('handleClick');
 
     const direction = e.target.id;
 
-    if (currentPartIndex === lastPart) {
-      checkoutToNextNews(
+    if (
+      currentPartIndex === lastPart ||
+      (currentPartIndex === firstPart &&
+        currentNewsIndex !== firstPart)
+    ) {
+      checkoutNews(
         currentNewsIndex,
         newsIds,
         setCurrentNewsId,

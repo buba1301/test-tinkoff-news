@@ -21,8 +21,6 @@ const Modal = ({ isOpen, onClosed, close }) => {
 
   const lastPart = currenNewsParts.length - 1;
 
-  console.log('RENDER MODal', currentPartIndex);
-
   return (
     <div className={s.modalBlanket} onClick={onClosed}>
       <div className={s.modal}>

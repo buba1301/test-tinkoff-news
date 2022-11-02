@@ -3,8 +3,6 @@ import React from 'react';
 import s from './Cars.module.css';
 
 const Card = ({ newsName, id, background, onClick }) => {
-  console.log('RENDER CARD');
-
   const style = {
     backgroundImage: `url(${background})`,
   };
@@ -25,8 +23,6 @@ const Card = ({ newsName, id, background, onClick }) => {
 };
 
 const CardWrap = ({ newsOnPageList, onClick }) => {
-  console.log('RENDER CARD WRAP');
-
   return (
     <>
       {newsOnPageList.map(({ newsName, id, background }) => {
