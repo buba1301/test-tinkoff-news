@@ -3,6 +3,7 @@
     width: 0%;
     background-color: #336fee;
   }
+
   to {
     width: 100%;
     background-color: #336fee;
@@ -14,8 +15,14 @@
   height: 166px;
   border-radius: 10px;
   background-color: cadetblue;
-  background-size: 166px 166px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   cursor: pointer;
+
+  box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.55);
+  -webkit-box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.55);
 
   display: flex;
   flex-direction: column;

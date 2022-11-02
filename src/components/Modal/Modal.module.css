@@ -5,7 +5,7 @@
   top: 0;
   left: 0;
   z-index: 900;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
 
   display: flex;
   justify-content: center;
@@ -28,4 +28,11 @@
   color: aliceblue;
   cursor: pointer;
   z-index: 999;
+
+  box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.55);
+  -webkit-box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.55);
+  -moz-box-shadow: 7px 7px 10px 0px rgba(0, 0, 0, 0.55);
+
+  background: rgb(34, 131, 195);
+  background: linear-gradient(0deg, rgba(34, 131, 195, 1) 0%, rgba(32, 68, 217, 1) 63%);
 }
