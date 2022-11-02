@@ -23,16 +23,16 @@ const SwitchButtons = ({
 
   const currentNewsIndex = newsIds.indexOf(currentNewsId);
 
+  const isLastPart = currentPartIndex === lastPart;
+  const isFirstPart = currentPartIndex === firstPart;
+  const notFirstNews = currentNewsIndex !== firstPart;
+
   const handleClickButton = (e) => {
     e.stopPropagation();
 
     const direction = e.target.id;
 
-    if (
-      currentPartIndex === lastPart ||
-      (currentPartIndex === firstPart &&
-        currentNewsIndex !== firstPart)
-    ) {
+    if (isLastPart || (isFirstPart && notFirstNews)) {
       checkoutNews(
         currentNewsIndex,
         newsIds,
