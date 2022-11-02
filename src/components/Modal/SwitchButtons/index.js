@@ -7,7 +7,7 @@ import Button from '../../Button';
 
 import { ModalContext } from '../../../context';
 
-import checkoutNews from '../utils';
+import { checkoutNews, getShiftValue } from '../utils';
 
 const arrowButtons = ['left', 'right'];
 
@@ -23,16 +23,20 @@ const SwitchButtons = ({
 
   const currentNewsIndex = newsIds.indexOf(currentNewsId);
 
-  const isLastPart = currentPartIndex === lastPart;
-  const isFirstPart = currentPartIndex === firstPart;
-  const notFirstNews = currentNewsIndex !== firstPart;
-
   const handleClickButton = (e) => {
     e.stopPropagation();
 
     const direction = e.target.id;
 
-    if (isLastPart || (isFirstPart && notFirstNews)) {
+    const isLastPart = currentPartIndex === lastPart;
+    const isFirstPart = currentPartIndex === firstPart;
+    const notFirstNews = currentNewsIndex !== firstPart;
+    const isCheckoutNewsLeft = direction === 'left';
+
+    if (
+      isLastPart ||
+      (isFirstPart && notFirstNews && isCheckoutNewsLeft)
+    ) {
       checkoutNews(
         currentNewsIndex,
         newsIds,
@@ -43,9 +47,7 @@ const SwitchButtons = ({
       return;
     }
 
-    const shift = 1;
-
-    const value = direction === 'right' ? shift : -shift;
+    const value = getShiftValue(direction);
 
     setcurrentPartIndex((prevState) => prevState + value);
   };

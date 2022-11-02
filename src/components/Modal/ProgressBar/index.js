@@ -5,7 +5,7 @@ import s from './ProgressBar.module.css';
 
 import { ModalContext } from '../../../context';
 
-import checkoutToNextNews from '../utils';
+import { checkoutNews } from '../utils';
 
 const ProgressBar = ({
   newsParts,
@@ -18,25 +18,22 @@ const ProgressBar = ({
   const { currentNewsId, newsIds, setCurrentNewsId } =
     useContext(ModalContext);
 
-  console.log('Active', active);
-
   const currentNewsIndex = newsIds.indexOf(currentNewsId);
+
+  const isLastPart = currentNewsIndex === lastPart;
+  const isLastNews = currentNewsIndex === newsIds.length - 1;
 
   useEffect(() => {
     const timerId = setTimeout(() => {
-      if (currentPartIndex === lastPart) {
-        if (currentNewsIndex === newsIds.length - 1) {
+      if (isLastPart) {
+        if (isLastNews) {
           closeModal();
           setcurrentPartIndex(0);
           setCurrentNewsId('');
           return;
         }
 
-        checkoutToNextNews(
-          currentNewsIndex,
-          newsIds,
-          setCurrentNewsId
-        );
+        checkoutNews(currentNewsIndex, newsIds, setCurrentNewsId);
 
         setcurrentPartIndex(0);
         return;
